@@ -1339,12 +1339,10 @@ footer {
     bottom: -100px;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.98);
+    background: transparent;
     padding: 1rem;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1356,9 +1354,26 @@ footer {
 
 .mobile-cta .cta-button {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     margin: 0 auto;
     display: block;
+}
+
+.mobile-cta > div {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.25));
+    backdrop-filter: blur(8px);
+}
+
+.mobile-cta > div iframe {
+    border-radius: 100px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
 }
 
 /* Optimize animations for reduced motion */
@@ -2357,6 +2372,10 @@ html {
             padding: 4rem 1.5rem;
         }
 
+        .share-card {
+            text-align: center;
+        }
+
         .share-card img {
             height: 500px;
             padding: 1rem;
@@ -2364,6 +2383,22 @@ html {
 
         .share-card h3 {
             font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .share-card-content {
+            text-align: center;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .share-checklist {
+            text-align: left;
+            max-width: 400px;
+            margin: 1.5rem auto 0;
+        }
+
+        .checklist-content {
+            align-items: flex-start;
         }
     }
 
@@ -2443,23 +2478,11 @@ html {
     /* Mobile Navigation */
     @media (max-width: 768px) {
         .navbar {
-            padding: 16px 24px;
-        }
-        
-        .nav-container {
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo-text {
-            font-size: 2rem;
-        }
-        
-        .nav-container button[data-tf-popup],
-        .nav-container div[data-tf-live] {
             display: none !important;
+        }
+        
+        .hero {
+            padding-top: 0;
         }
     }
 
