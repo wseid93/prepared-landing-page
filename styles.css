@@ -441,7 +441,7 @@ section h3 {
 
 .stat-item {
     flex: 1;
-    padding: 0 1rem;
+        padding: 0 1rem;
     min-width: 150px;
     text-align: center;
 }
@@ -665,7 +665,7 @@ section h3 {
 }
 
 .author-role {
-    font-size: 0.875rem;
+        font-size: 0.875rem;
     color: #aaa;
 }
 
@@ -2373,11 +2373,17 @@ html {
         right: 0;
         z-index: 1000;
         background: #000000;
-        padding: 1.25rem 0;
         transition: all 0.3s ease;
         display: block;
+        padding: 20px 40px;
     }
 
+    .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
 
     .nav-logo {
         text-decoration: none;
@@ -2385,7 +2391,7 @@ html {
 
     .logo-text {
         color: #FFFFFF;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: 800;
         letter-spacing: -0.02em;
     }
@@ -2427,12 +2433,19 @@ html {
 
     /* Mobile Navigation */
     @media (max-width: 768px) {
+        .navbar {
+            padding: 16px 24px;
+        }
+        
         .nav-container {
-            padding: 0 1.5rem;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .logo-text {
-            font-size: 1.25rem;
+            font-size: 2rem;
         }
         
         .nav-button iframe {
