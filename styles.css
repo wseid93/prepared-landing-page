@@ -2457,9 +2457,9 @@ html {
             font-size: 2rem;
         }
         
-        .nav-button iframe {
-            width: 120px !important;
-            height: 44px !important;
+        .nav-container button[data-tf-popup],
+        .nav-container div[data-tf-live] {
+            display: none !important;
         }
     }
 
