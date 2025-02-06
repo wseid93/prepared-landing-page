@@ -1369,15 +1369,17 @@ footer {
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.25));
-    backdrop-filter: blur(8px);
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15));
 }
 
 .mobile-cta > div iframe {
     border-radius: 100px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 /* Optimize animations for reduced motion */
