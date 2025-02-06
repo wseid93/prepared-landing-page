@@ -2378,14 +2378,6 @@ html {
         display: block;
     }
 
-    .nav-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 
     .nav-logo {
         text-decoration: none;
@@ -2399,20 +2391,38 @@ html {
     }
 
     .nav-button {
-        background: #FFFFFF;
-        color: #000000;
-        border: none;
-        padding: 0.75rem 2rem;
-        border-radius: 100px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        display: inline-block !important;
+        width: auto !important;
+        height: auto !important;
+        box-shadow: none !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        border-radius: 0 !important;
     }
 
     .nav-button:hover {
-        background: rgba(255, 255, 255, 0.9);
-        transform: translateY(-2px);
+        background: transparent !important;
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .nav-button iframe {
+        width: 130px !important;
+        height: 48px !important;
+        border: none !important;
+        display: block !important;
+        background: transparent !important;
+    }
+
+    @media (max-width: 768px) {
+        .nav-button iframe {
+            width: 120px !important;
+            height: 44px !important;
+        }
     }
 
     /* Mobile Navigation */
@@ -2425,10 +2435,17 @@ html {
             font-size: 1.25rem;
         }
         
-        .nav-button {
-            padding: 0.75rem 1.5rem;
-            font-size: 0.9rem;
+        .nav-button iframe {
+            width: 120px !important;
+            height: 44px !important;
         }
+    }
+
+    .nav-button iframe {
+        width: 100% !important;
+        height: 100% !important;
+        border: none;
+        display: block;
     }
 
     /* Partners Showcase Section */
@@ -2671,12 +2688,3 @@ html {
             height: 52px;
         }
     }
-
-    <script>
-      window.tf.load({
-        formId: 'YOUR_FORM_ID_HERE',
-        popup: true,
-        opacity: 0,
-        size: 100,
-      });
-    </script>
