@@ -1345,6 +1345,9 @@ footer {
     z-index: 1000;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mobile-cta-visible {
@@ -1447,6 +1450,12 @@ footer {
     .mobile-cta .cta-button {
         padding: 1rem 2rem;
         font-size: 1.1rem;
+    }
+    
+    .mobile-cta > div {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
     }
 }
 
