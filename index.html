@@ -3,11 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://embed.typeform.com" crossorigin>
+    <link rel="preconnect" href="https://i.imgur.com" crossorigin>
+    
     <link rel="icon" type="image/png" href="https://i.imgur.com/AcWQBZ7.png">
+
+    <!-- Critical CSS inlined -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        :root {
+            --accent: #22C55E;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            font-family: var(--font-primary);
+            font-size: 16px;
+            line-height: 1.5;
+            color: #1A202C;
+            background-color: #FFFFFF;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            -webkit-text-size-adjust: 100%; /* Prevent iOS font size adjustments */
+        }
+        body.loaded {opacity: 1;}
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            padding-top: 80px;
+            padding-bottom: 30px;
+            margin-bottom: -50px;
+            contain: layout paint; /* Optimize rendering performance */
+        }
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 2rem;
+            will-change: transform; /* Hint for browser optimization */
+        }
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+                contain: layout paint; /* Optimize rendering on mobile */
+            }
+            .hero-video {
+                display: none;
+            }
+            .hero-image-container {
+                background-image: url('https://i.imgur.com/lhhxgxB.jpg');
+                background-size: cover;
+                background-position: center;
+                contain: strict; /* Further optimize rendering */
+            }
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 20px;
+                background-color: #000;
+            }
+            .navbar .nav-logo {font-size: 1.2rem;}
+            .navbar .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            /* Optimize tap targets for mobile */
+            button, 
+            [role="button"],
+            a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            /* Prevent content reflow */
+            img, video {
+                height: auto;
+                aspect-ratio: attr(width) / attr(height);
+            }
+        }
+    </style>
 
 <!-- Primary Meta Tags -->
 <meta name="title" content="Personalized Chef-Made Meal Prep">
-<meta name="description" content="Discover personalized, chef-crafted meal prep designed to fuel your busy lifestyle. Enjoy fresh, locally sourced meals delivered right to your door—experience convenience and culinary excellence.">
+<meta name="description" content="Discover personalized, chef-crafted meal prep tailored to your dietary needs and fitness goals. Fresh, locally sourced meals delivered ready-to-eat.">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
@@ -37,13 +127,79 @@
 <meta name="apple-mobile-web-app-title" content="Prepared">
 
     <title>Prepared - AI-Personalized Meal Delivery</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Updated Google Fonts with additional weights -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Add FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Typeform Widget -->
-    <script src="//embed.typeform.com/next/embed.js"></script>
+    <link rel="canonical" href="https://eatprepared.com/">
+    
+    <!-- Preload key resources -->
+    <link rel="preload" href="https://i.imgur.com/lhhxgxB.jpg" as="image" fetchpriority="high">
+    
+    <!-- Load non-critical CSS with lower priority -->
+    <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.min.css"></noscript>
+    
+    <!-- Load fonts asynchronously with optimized loading -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- FontAwesome removed - using inline SVG icons instead -->
+    
+    <!-- Typeform Widget with defer to prevent blocking -->
+    <script src="//embed.typeform.com/next/embed.js" defer></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FoodEstablishment",
+      "name": "Prepared",
+      "description": "Discover personalized, chef-crafted meal prep tailored to your dietary needs and fitness goals.",
+      "url": "https://eatprepared.com/",
+      "image": "https://i.imgur.com/tPwADZs.png"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How does Prepared personalize my meals?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our AI-powered system tailors meal prep to your preferences, dietary needs, and macros."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Can I customize my meal plan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, you have full control over chefs, meal types, macros, and dietary preferences every week."
+        }
+      }]
+    }
+    </script>
+
+    <!-- SVG Icon Definitions -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="icon-dumbbell" viewBox="0 0 640 512">
+            <path d="M104 96H56c-13.3 0-24 10.7-24 24v104H8c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h24v104c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24zm528 128h-24V120c0-13.3-10.7-24-24-24h-48c-13.3 0-24 10.7-24 24v272c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V288h24c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM456 32h-48c-13.3 0-24 10.7-24 24v168H256V56c0-13.3-10.7-24-24-24h-48c-13.3 0-24 10.7-24 24v400c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V288h128v168c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24z"/>
+        </symbol>
+        <symbol id="icon-chart-line" viewBox="0 0 512 512">
+            <path d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"/>
+        </symbol>
+        <symbol id="icon-ban" viewBox="0 0 512 512">
+            <path d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"/>
+        </symbol>
+        <symbol id="icon-bolt" viewBox="0 0 320 512">
+            <path d="M296 160H180.6l42.6-129.8C227.2 15 215.7 0 200 0H56C44 0 33.8 8.9 32.2 20.8l-32 240C-1.7 275.2 9.5 288 24 288h118.7L96.6 482.5c-3.6 15.2 8 29.5 23.3 29.5 8.4 0 16.4-4.4 20.8-12l176-304c9.3-15.9-2.2-36-20.7-36z"/>
+        </symbol>
+        <symbol id="icon-brain" viewBox="0 0 576 512">
+            <path d="M208 0c-29.9 0-54.7 20.5-61.8 48.2-.8 0-1.4-.2-2.2-.2-35.3 0-64 28.7-64 64 0 4.8.6 9.5 1.7 14C52.5 138 32 166.6 32 200c0 12.6 3.2 24.3 8.3 34.9C16.3 248.7 0 274.3 0 304c0 33.3 20.4 61.9 49.4 73.9-.9 4.6-1.4 9.3-1.4 14.1 0 39.8 32.2 72 72 72 4.1 0 8.1-.5 12-1.2 9.6 28.5 36.2 49.2 68 49.2 39.8 0 72-32.2 72-72V64c0-35.3-28.7-64-64-64zm368 304c0-29.7-16.3-55.3-40.3-69.1 5.2-10.6 8.3-22.3 8.3-34.9 0-33.4-20.5-62-49.7-74 1-4.5 1.7-9.2 1.7-14 0-35.3-28.7-64-64-64-.8 0-1.5.2-2.2.2C422.7 20.5 397.9 0 368 0c-35.3 0-64 28.6-64 64v376c0 39.8 32.2 72 72 72 31.8 0 58.4-20.7 68-49.2 3.9.7 7.9 1.2 12 1.2 39.8 0 72-32.2 72-72 0-4.8-.5-9.5-1.4-14.1 29-12 49.4-40.6 49.4-73.9z"/>
+        </symbol>
+        <symbol id="icon-shield" viewBox="0 0 512 512">
+            <path d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/>
+        </symbol>
+    </svg>
 </head>
 <body>
     <!-- Add Navigation Bar -->
@@ -70,6 +226,8 @@
                 loop 
                 muted 
                 playsinline
+                loading="lazy"
+                fetchpriority="low"
                 poster="https://i.imgur.com/lhhxgxB.jpg">
                 <source src="https://i.imgur.com/lhhxgxB.mp4" type="video/mp4">
             </video>
@@ -100,7 +258,7 @@
             <h2>Your Meal Planning Journey in 3 Steps</h2>
             <div class="share-grid">
                 <div class="share-card">
-                    <img src="https://i.imgur.com/dD2wjpo.png" alt="Social sharing example">
+                    <img src="https://i.imgur.com/dD2wjpo.png" alt="Social sharing example" loading="lazy">
                     <div class="share-card-content">
                         <h3>Find a Chef for This Week</h3>
                         <ul class="share-checklist">
@@ -121,7 +279,7 @@
                 </div>
 
                 <div class="share-card">
-                    <img src="https://i.imgur.com/5qtjtPC.png" alt="Healthcare sharing example">
+                    <img src="https://i.imgur.com/5qtjtPC.png" alt="Healthcare sharing example" loading="lazy">
                     <div class="share-card-content">
                         <h3>Pick a Meal Plan That Fits You</h3>
                         <ul class="share-checklist">
@@ -142,7 +300,7 @@
                 </div>
 
                 <div class="share-card">
-                    <img src="https://i.imgur.com/myhrFjr.png" alt="Teams example">
+                    <img src="https://i.imgur.com/myhrFjr.png" alt="Teams example" loading="lazy">
                     <div class="share-card-content">
                         <h3>Checkout & Track Your Order</h3>
                         <ul class="share-checklist">
@@ -175,7 +333,7 @@
                         <div class="partner-card chef-card">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan">
+                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition, Newport Beach" loading="lazy">
                                 </div>
                                 <div class="partner-info">
                                     <h3>Chef Jonathan</h3>
@@ -267,7 +425,7 @@
                         <div class="partner-card chef-card">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan">
+                                <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition, Newport Beach" loading="lazy">
                                 </div>
                                 <div class="partner-info">
                                     <h3>Chef Jonathan</h3>
@@ -417,7 +575,7 @@
                         <div class="stat-card">
                             <div class="stat-front">
                                 <div class="stat-icon">
-                                    <i class="fas fa-dumbbell"></i>
+                                    <svg width="24" height="24"><use xlink:href="#icon-dumbbell"/></svg>
                                 </div>
                                 <div class="stat-content">
                                     <div class="stat-highlight">23% Faster</div>
@@ -430,7 +588,7 @@
                         <div class="stat-card">
                             <div class="stat-front">
                                 <div class="stat-icon">
-                                    <i class="fas fa-chart-line"></i>
+                                    <svg width="24" height="24"><use xlink:href="#icon-chart-line"/></svg>
                                 </div>
                                 <div class="stat-content">
                                     <div class="stat-highlight">10% More</div>
@@ -443,7 +601,7 @@
                         <div class="stat-card">
                             <div class="stat-front">
                                 <div class="stat-icon">
-                                    <i class="fas fa-ban"></i>
+                                    <svg width="24" height="24"><use xlink:href="#icon-ban"/></svg>
                                 </div>
                                 <div class="stat-content">
                                     <div class="stat-highlight">50% Less</div>
@@ -462,7 +620,7 @@
                         <div class="stat-card">
                             <div class="stat-front">
                                 <div class="stat-icon">
-                                    <i class="fas fa-bolt"></i>
+                                    <svg width="24" height="24"><use xlink:href="#icon-bolt"/></svg>
                                 </div>
                                 <div class="stat-content">
                                     <div class="stat-highlight">25% More</div>
@@ -475,7 +633,7 @@
                         <div class="stat-card">
                             <div class="stat-front">
                                 <div class="stat-icon">
-                                    <i class="fas fa-brain"></i>
+                                    <svg width="24" height="24"><use xlink:href="#icon-brain"/></svg>
                                 </div>
                                 <div class="stat-content">
                                     <div class="stat-highlight">93% More</div>
@@ -488,7 +646,7 @@
                         <div class="stat-card">
                             <div class="stat-front">
                                 <div class="stat-icon">
-                                    <i class="fas fa-shield-alt"></i>
+                                    <svg width="24" height="24"><use xlink:href="#icon-shield"/></svg>
                                 </div>
                                 <div class="stat-content">
                                     <div class="stat-highlight">2.5 Years</div>
@@ -655,62 +813,6 @@
             </div>
         </section>
 
-        <script>
-            // Enhanced Countdown Timer
-            function updateCountdown() {
-                // Set end date to April 11th, 2025 at 23:59:59 PST
-                const endDate = new Date('2025-04-12T06:59:59Z').getTime(); // 23:59:59 PST = 06:59:59 UTC next day
-                
-                function updateTimer() {
-                    const currentTime = new Date().getTime();
-                    const difference = endDate - currentTime;
-                    
-                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-                    
-                    document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
-                    document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
-                    document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
-                    document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
-                }
-                
-                updateTimer();
-                return setInterval(updateTimer, 1000);
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                // Section transitions
-                const observerOptions = {
-                    root: null,
-                    rootMargin: '0px',
-                    threshold: 0.2
-                };
-
-                const sectionObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('animate-visible');
-                            
-                            // Add card index for staggered animations
-                            const cards = entry.target.querySelectorAll('.benefit-card, .testimonial-card');
-                            cards.forEach((card, index) => {
-                                card.style.setProperty('--card-index', index);
-                            });
-                        }
-                    });
-                }, observerOptions);
-
-                document.querySelectorAll('.section-transition').forEach(section => {
-                    sectionObserver.observe(section);
-                });
-
-                // Start the countdown timer
-                updateCountdown();
-            });
-        </script>
-
         <section class="signup section-transition light-to-dark">
             <div class="signup-container">
                 <h2>Join the Future of Personalized Nutrition</h2>
@@ -730,91 +832,6 @@
             </p>
             <div data-tf-live="01JKCR97WBT8JFCGH2EX1Z2M0J"></div>
         </div>
-
-        <script>
-            document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const email = document.getElementById('email').value;
-                const referralLink = generateReferralLink(email);
-                document.getElementById('referral-link').value = referralLink;
-                
-                const form = document.getElementById('waitlist-form');
-                const successMessage = document.getElementById('signup-success');
-                
-                form.style.opacity = '0';
-                setTimeout(() => {
-                    form.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    setTimeout(() => {
-                        successMessage.style.opacity = '1';
-                    }, 50);
-                }, 300);
-            });
-
-            // Function to update spots display
-            const updateSpotsDisplay = (spots) => {
-                const spotCounters = document.querySelectorAll('#spots-left, #popup-spots-left');
-                spotCounters.forEach(counter => {
-                    counter.textContent = spots;
-                });
-
-                // Update visibility of spots-related elements
-                if (spots <= 0) {
-                    document.querySelectorAll('.spots-counter').forEach(el => {
-                        el.style.display = 'none';
-                    });
-                }
-            };
-
-            // Initialize spots counter
-            document.addEventListener('DOMContentLoaded', () => {
-                let spotsLeft = 85; // Initial spots
-                updateSpotsDisplay(spotsLeft);
-
-                // Listen for Typeform submission events
-                window.addEventListener('message', (event) => {
-                    if (event.data.type === 'form-submit') {
-                        // Decrement spots on submission
-                        spotsLeft = Math.max(0, spotsLeft - 1);
-                        updateSpotsDisplay(spotsLeft);
-                    }
-                });
-            });
-
-            // Exit Intent
-            let hasShownPopup = false;
-            document.addEventListener('mouseleave', (e) => {
-                if (e.clientY < 0 && !hasShownPopup) {
-                    document.getElementById('exit-popup').classList.add('visible');
-                    document.getElementById('exit-popup-overlay').classList.add('visible');
-                    hasShownPopup = true;
-                }
-            });
-
-            document.getElementById('exit-popup-overlay').addEventListener('click', () => {
-                document.getElementById('exit-popup').classList.remove('visible');
-                document.getElementById('exit-popup-overlay').classList.remove('visible');
-            });
-
-            // Referral System
-            const generateReferralLink = (email) => {
-                const baseUrl = window.location.origin;
-                return `${baseUrl}?ref=${btoa(email)}`;
-            };
-
-            const copyReferralLink = () => {
-                const linkInput = document.getElementById('referral-link');
-                linkInput.select();
-                document.execCommand('copy');
-                
-                const copyButton = document.querySelector('.copy-button');
-                copyButton.textContent = 'Copied!';
-                setTimeout(() => {
-                    copyButton.textContent = 'Copy';
-                }, 2000);
-            };
-        </script>
 
         <section class="faq section-transition light-to-dark">
             <h2>Frequently Asked Questions</h2>
@@ -960,49 +977,223 @@
         </div>
     </footer>
 
+    <!-- Consolidated and optimized JS -->
     <script>
-        // Enhanced Animation System
+        // Initialize only critical functionality immediately
         document.body.classList.add('js-loading');
+        
+        // Performance monitoring
+        if (window.performance && window.performance.timing) {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    const timing = window.performance.timing;
+                    const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+                    const domLoadTime = timing.domContentLoadedEventEnd - timing.navigationStart;
+                    
+                    console.log('Page Load Time: ' + (pageLoadTime / 1000).toFixed(2) + ' seconds');
+                    console.log('DOM Load Time: ' + (domLoadTime / 1000).toFixed(2) + ' seconds');
+                    
+                    // Add to localStorage for comparison with future visits
+                    try {
+                        const prevLoadTime = localStorage.getItem('prevPageLoadTime');
+                        if (prevLoadTime) {
+                            const improvement = ((prevLoadTime - pageLoadTime) / prevLoadTime * 100).toFixed(1);
+                            if (improvement > 0) {
+                                console.log('Performance improved by ' + improvement + '% since last visit');
+                            }
+                        }
+                        localStorage.setItem('prevPageLoadTime', pageLoadTime);
+                    } catch (e) {
+                        // Ignore storage errors
+                    }
+                }, 0);
+            });
+        }
+        
+        // Defer non-critical functionality
+        window.addEventListener('DOMContentLoaded', () => {
+            // Exit Intent handling
+            let hasShownPopup = false;
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY < 0 && !hasShownPopup) {
+                    document.getElementById('exit-popup').classList.add('visible');
+                    document.getElementById('exit-popup-overlay').classList.add('visible');
+                    hasShownPopup = true;
+                }
+            });
 
+            document.getElementById('exit-popup-overlay')?.addEventListener('click', () => {
+                document.getElementById('exit-popup').classList.remove('visible');
+                document.getElementById('exit-popup-overlay').classList.remove('visible');
+            });
+            
+            // Update spots counter functionality
+            const updateSpotsDisplay = (spots) => {
+                const spotCounters = document.querySelectorAll('#spots-left, #popup-spots-left');
+                spotCounters.forEach(counter => {
+                    if (counter) counter.textContent = spots;
+                });
+
+                if (spots <= 0) {
+                    document.querySelectorAll('.spots-counter').forEach(el => {
+                        if (el) el.style.display = 'none';
+                    });
+                }
+            };
+            
+            let spotsLeft = 85; // Initial spots
+            updateSpotsDisplay(spotsLeft);
+
+            // Listen for Typeform submission events
+            window.addEventListener('message', (event) => {
+                if (event.data.type === 'form-submit') {
+                    spotsLeft = Math.max(0, spotsLeft - 1);
+                    updateSpotsDisplay(spotsLeft);
+                }
+            });
+            
+            // Initialize countdown timer with requestAnimationFrame for better performance
+            const updateCountdown = () => {
+                const endDate = new Date('2025-04-12T06:59:59Z').getTime();
+                
+                const updateTimer = () => {
+                    const currentTime = new Date().getTime();
+                    const difference = endDate - currentTime;
+                    
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                    
+                    const daysElement = document.getElementById('countdown-days');
+                    const hoursElement = document.getElementById('countdown-hours');
+                    const minutesElement = document.getElementById('countdown-minutes');
+                    const secondsElement = document.getElementById('countdown-seconds');
+                    
+                    if (daysElement) daysElement.textContent = String(days).padStart(2, '0');
+                    if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
+                    if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
+                    if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
+                    
+                    // Use requestAnimationFrame instead of setInterval for better performance
+                    if (difference > 0) {
+                        // Only update once per second to save CPU on mobile
+                        setTimeout(() => requestAnimationFrame(updateTimer), 1000);
+                    }
+                }
+                
+                updateTimer();
+            };
+            
+            // Initialize countdown if elements exist
+            if (document.getElementById('countdown-days')) {
+                updateCountdown();
+            }
+        });
+        
+        // Use window load event for non-critical visual enhancements
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
             
             // Initialize Intersection Observer for animations
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.2
-            };
-
             const animationObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animate-visible');
+                        
+                        // Add card index for staggered animations
+                        const cards = entry.target.querySelectorAll('.benefit-card, .testimonial-card');
+                        cards.forEach((card, index) => {
+                            card.style.setProperty('--card-index', index);
+                        });
                     }
                 });
+            }, { 
+                root: null, 
+                rootMargin: '0px', 
+                threshold: 0.1  // Lower threshold to improve performance
             });
 
-            // Observe all animated sections
-            document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
-                animationObserver.observe(element);
-            });
+            // Detect if device is low-end
+            const isLowEndDevice = () => {
+                // Check for low memory (less than 2GB)
+                if (navigator.deviceMemory && navigator.deviceMemory < 2) return true;
+                
+                // Check for low-end CPU (older/slower devices)
+                if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) return true;
+                
+                return false;
+            };
+            
+            // Only enable animations on capable devices
+            if (!isLowEndDevice() && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                // Observe all animated sections
+                document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
+                    animationObserver.observe(element);
+                });
+            } else {
+                // For low-end devices, just show everything without animations
+                document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
+                    element.classList.add('animate-visible');
+                });
+            }
 
-            // Parallax scroll effect for hero section
+            // Parallax scroll effect for hero section (optimized with requestAnimationFrame)
             let lastScrollY = window.scrollY;
             const hero = document.querySelector('.hero');
+            let ticking = false;
             
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                if (scrollY > 0 && scrollY < window.innerHeight) {
-                    const offset = scrollY * 0.5;
-                    hero.style.setProperty('--scroll-offset', `${offset}px`);
-                    hero.classList.add('scrolling');
-                } else {
-                    hero.classList.remove('scrolling');
-                }
-                lastScrollY = scrollY;
-            });
+            // Only enable parallax on desktop devices
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            
+            if (!isMobile && hero) {
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            const scrollY = window.scrollY;
+                            if (scrollY > 0 && scrollY < window.innerHeight) {
+                                const offset = scrollY * 0.5;
+                                hero.style.setProperty('--scroll-offset', `${offset}px`);
+                                hero.classList.add('scrolling');
+                            } else {
+                                hero.classList.remove('scrolling');
+                            }
+                            lastScrollY = scrollY;
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+            }
 
+            // Mobile CTA visibility optimized with passive event listener
+            const mobileCTA = document.querySelector('.mobile-cta');
+            let lastScrollTop = 0;
+            let ctaTicking = false;
+            
+            if (mobileCTA) {
+                // Use passive event listener for better scroll performance
+                window.addEventListener('scroll', () => {
+                    if (!ctaTicking) {
+                        requestAnimationFrame(() => {
+                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                            const isScrollingDown = scrollTop > lastScrollTop;
+                            const isTopOfPage = scrollTop < 100;
+
+                            if (isScrollingDown && !isTopOfPage) {
+                                mobileCTA.classList.add('mobile-cta-visible');
+                            } else {
+                                mobileCTA.classList.remove('mobile-cta-visible');
+                            }
+
+                            lastScrollTop = scrollTop;
+                            ctaTicking = false;
+                        });
+                        ctaTicking = true;
+                    }
+                }, { passive: true }); // Add passive flag for better performance
+            }
+                            
             // Smooth scroll for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -1020,49 +1211,23 @@
                     }
                 });
             });
-
-            // Mobile CTA visibility
-            const mobileCTA = document.querySelector('.mobile-cta');
-            let lastScrollTop = 0;
-
-            window.addEventListener('scroll', () => {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const isScrollingDown = scrollTop > lastScrollTop;
-                const isTopOfPage = scrollTop < 100;
-
-                if (isScrollingDown && !isTopOfPage) {
-                    mobileCTA.classList.add('mobile-cta-visible');
-                } else {
-                    mobileCTA.classList.remove('mobile-cta-visible');
+        });
+    </script>
+    
+    <!-- Typeform initialization script moved from head for performance -->
+    <script>
+        // Initialize Typeform after page load
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            
+            // Make sure Typeform elements are initialized properly
+            if (window.tf && typeof window.tf.createWidget === 'function') {
+                const widgets = document.querySelectorAll('[data-tf-live]');
+                if (widgets.length > 0) {
+                    console.log('Typeform widgets detected:', widgets.length);
                 }
-
-                lastScrollTop = scrollTop;
-            });
-
-            // Lazy loading for images
-            document.addEventListener('DOMContentLoaded', function() {
-                const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-                if ('loading' in HTMLImageElement.prototype) {
-                    // Browser supports native lazy loading
-                    lazyImages.forEach(img => {
-                        img.src = img.dataset.src;
-                    });
-                } else {
-                    // Fallback for browsers that don't support lazy loading
-                    const lazyImageObserver = new IntersectionObserver((entries, observer) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const img = entry.target;
-                                img.src = img.dataset.src;
-                                observer.unobserve(img);
-                            }
-                        });
-                    });
-
-                    lazyImages.forEach(img => lazyImageObserver.observe(img));
-                }
-            });
+            }
         });
     </script>
 </body>
-</html> 
+</html>

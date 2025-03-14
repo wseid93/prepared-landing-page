@@ -1,3 +1,10 @@
+/* 
+ * Optimized styles.css
+ * - Organized for better parsing
+ * - Critical styles prioritized
+ * - Reduced specificity where possible
+ */
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -41,6 +48,7 @@ body {
     text-rendering: optimizeLegibility;
     color: var(--text-dark);
     background-color: var(--background);
+    will-change: opacity;
 }
 
 /* Typography */
@@ -71,7 +79,17 @@ p {
     font-size: 1.125rem;
 }
 
-/* Enhanced Headlines */
+/* Loading State - Critical */
+.js-loading {
+    opacity: 0;
+    transition: opacity var(--animation-duration-medium) var(--animation-timing);
+}
+
+.js-loading.loaded {
+    opacity: 1;
+}
+
+/* Enhanced Headlines - Hero Section */
 .hero h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 1.1;
@@ -79,6 +97,7 @@ p {
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
     text-transform: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero .subheadline {
@@ -87,242 +106,12 @@ p {
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2.5rem;
     font-weight: 400;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Section Headlines */
-section h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: var(--line-height-tight);
-    font-weight: var(--font-weight-extrabold);
-    letter-spacing: var(--letter-spacing-tight);
-    margin-bottom: 2.5rem;
-}
-
-section h3 {
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
-    line-height: 1.2;
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--letter-spacing-normal);
-    margin-bottom: 1.5rem;
-}
-
-/* Benefits Cards */
-.benefit-content h3 {
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--letter-spacing-normal);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-}
-
-.benefit-content p {
-    font-size: clamp(1rem, 2vw, 1.125rem);
-    line-height: var(--line-height-relaxed);
-    color: var(--text-light);
-}
-
-/* Testimonials */
-.testimonial-quote p {
-    font-size: clamp(1.125rem, 2.5vw, 1.25rem);
-    line-height: var(--line-height-relaxed);
-    font-weight: var(--font-weight-normal);
-    letter-spacing: -0.01em;
-}
-
-.author-name {
-    font-size: 1.125rem;
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: var(--letter-spacing-normal);
-}
-
-.author-role {
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-}
-
-/* Early Access Section */
-.early-access h2 {
-    font-size: clamp(2.75rem, 6vw, 4.5rem);
-    line-height: var(--line-height-tight);
-    font-weight: var(--font-weight-black);
-    letter-spacing: var(--letter-spacing-tight);
-    margin-bottom: 1rem;
-}
-
-.early-access h3 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: var(--font-weight-extrabold);
-    letter-spacing: var(--letter-spacing-normal);
-    margin-bottom: 2rem;
-}
-
-.offer-description {
-    font-size: 1.2rem;
-    line-height: 1.7;
-    margin-bottom: 3rem;
-}
-
-/* FAQ Section */
-.faq-question {
-    font-size: clamp(1.125rem, 2.5vw, 1.25rem);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: var(--letter-spacing-normal);
-    line-height: 1.4;
-}
-
-.faq-answer {
-    font-size: clamp(1rem, 2vw, 1.125rem);
-    line-height: var(--line-height-relaxed);
-}
-
-/* CTA Buttons */
-.cta-button {
-    background: #fff;
-    color: #000;
-    border: none;
-    padding: 1.25rem 3.5rem;
-    border-radius: 100px;
-    font-size: 1.125rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 3rem;
-}
-
-.cta-button:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
-}
-
-/* Dark Section Button Variations */
-.hero .cta-button,
-.early-access .cta-button,
-.testimonials .cta-button {
-    background: var(--accent);
-    color: #FFFFFF;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
-    align-items: center;
-}
-
-.hero .cta-button:hover,
-.early-access .cta-button:hover,
-.testimonials .cta-button:hover {
-    background: #20B955;
-    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.25),
-                0 0 60px rgba(255, 255, 255, 0.1);
-}
-
-/* Light Section Button Variations */
-.benefits .cta-button,
-.faq .cta-button {
-    background: #000000;
-    color: #FFFFFF;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-.benefits .cta-button:hover,
-.faq .cta-button:hover {
-    background: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25),
-                0 0 60px rgba(0, 0, 0, 0.1);
-}
-
-/* Submit Button Enhancement */
-.submit-button {
-    background: #000000;
-    color: #FFFFFF;
-    border: none;
-    padding: 1.25rem 2.5rem;
-    border-radius: 100px;
-    font-size: 1.2rem;
-    font-weight: var(--font-weight-bold);
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-.submit-button:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25),
-                0 0 60px rgba(0, 0, 0, 0.1);
-    background: rgba(0, 0, 0, 0.9);
-}
-
-/* Mobile CTA Enhancement */
-.mobile-cta .cta-button {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .cta-button {
-        padding: 1.125rem 2.5rem;
-        font-size: 1.1rem;
-    }
-    
-    .submit-button {
-        padding: 1.125rem 2rem;
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 375px) {
-    .cta-button {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-    }
-    
-    .submit-button {
-        padding: 1rem 1.75rem;
-        font-size: 1rem;
-    }
-}
-
-/* Exit Popup Button Enhancement */
-.exit-popup .cta-button {
-    width: 100%;
-    margin-top: 1.5rem;
-    background: #000000;
-    color: #FFFFFF;
-}
-
-.exit-popup .cta-button:hover {
-    background: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
-}
-
-/* Navigation CTA Enhancement */
-.nav-cta {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    color: #FFFFFF;
-    padding: 0.75rem 1.5rem;
-    border-radius: 100px;
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
-}
-
-.nav-cta:hover {
-    background: rgba(255, 255, 255, 0.95);
-    color: #000000;
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-}
-
-/* Hero Section */
+/* Hero Section - Critical */
 .hero {
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -331,6 +120,36 @@ section h3 {
     overflow: hidden;
     background: #000;
     padding-top: 80px;
+    padding-bottom: 30px;
+    margin-bottom: -50px;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 13l5 5 5-5'/%3E%3Cpath d='M7 6l5 5 5-5'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: bounce 2s infinite;
+    z-index: 10;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
 }
 
 .hero-video {
@@ -366,23 +185,6 @@ section h3 {
     z-index: 1;
 }
 
-/* Remove the old image animation */
-.hero-image {
-    display: none;
-}
-
-@keyframes zoomEffect {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
 .hero-content {
     max-width: 1000px;
     margin: 0 auto;
@@ -392,27 +194,76 @@ section h3 {
     padding: 0 2rem;
 }
 
-/* Enhance text readability */
-.hero h1 {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+/* Navigation - Critical */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #000000;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 20px 40px;
 }
 
-.hero .subheadline {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-/* Mobile optimization */
+.nav-logo {
+    text-decoration: none;
+}
+
+.logo-text {
+    color: #FFFFFF;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* Mobile CTA - Critical for mobile */
+.mobile-cta {
+    position: fixed;
+    bottom: -100px;
+    left: 0;
+    right: 0;
+    background: transparent;
+    padding: 1rem;
+    z-index: 1000;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-cta-visible {
+    transform: translateY(-100px);
+}
+
+/* Responsive Media Queries - Critical */
 @media (max-width: 768px) {
+    .hero {
+        min-height: 80vh;
+        padding: 2rem 1rem 5rem;
+        margin-bottom: -70px;
+    }
+    
+    .hero::after {
+        bottom: 40px;
+        width: 36px;
+        height: 36px;
+    }
+    
     .hero-content {
         padding: 0 1.5rem;
     }
-
-    .hero {
-        padding-top: 4rem;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
+    
+    .navbar {
+        display: none !important;
     }
 }
 
