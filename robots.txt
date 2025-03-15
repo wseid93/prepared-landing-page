@@ -1,0 +1,30 @@
+# robots.txt for https://eatprepared.com/
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /includes/
+Disallow: /cgi-bin/
+
+# Allow important bots full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Block certain problematic bots
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Sitemaps
+Sitemap: https://eatprepared.com/sitemap.xml

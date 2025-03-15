@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>https://eatprepared.com/</loc>
+    <lastmod>2024-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://i.imgur.com/tPwADZs.png</image:loc>
+      <image:title>Prepared - AI-Personalized Meal Delivery</image:title>
+      <image:caption>Chef-crafted, customized meal prep designed to fuel your performance</image:caption>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://i.imgur.com/lhhxgxB.jpg</video:thumbnail_loc>
+      <video:title>Prepared Meal Delivery</video:title>
+      <video:description>Chef preparing personalized meals in a professional kitchen</video:description>
+      <video:content_loc>https://i.imgur.com/lhhxgxB.mp4</video:content_loc>
+      <video:player_loc>https://eatprepared.com/</video:player_loc>
+      <video:duration>15</video:duration>
+      <video:publication_date>2024-06-01T08:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://eatprepared.com/privacy</loc>
+    <lastmod>2024-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://eatprepared.com/terms</loc>
+    <lastmod>2024-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>

@@ -1,11 +1,18 @@
 {
   "name": "Prepared - AI-Personalized Meal Delivery",
   "short_name": "Prepared",
-  "description": "Personalized, chef-crafted meal prep tailored to your dietary needs and fitness goals.",
-  "start_url": "/",
+  "description": "Chef-crafted, customized meal prep designed to fuel your performance with macros tailored to your fitness goals.",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#22C55E",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["food", "health", "fitness"],
+  "id": "/",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "https://i.imgur.com/AcWQBZ7.png",
@@ -20,6 +27,20 @@
       "purpose": "any maskable"
     }
   ],
-  "prefer_related_applications": false,
-  "orientation": "portrait"
+  "screenshots": [
+    {
+      "src": "https://i.imgur.com/tPwADZs.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Prepared Home Screen"
+    },
+    {
+      "src": "https://i.imgur.com/lhhxgxB.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpg",
+      "form_factor": "narrow",
+      "label": "Prepared Mobile View"
+    }
+  ]
 } 

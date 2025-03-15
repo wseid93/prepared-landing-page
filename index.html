@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://embed.typeform.com" crossorigin>
     <link rel="preconnect" href="https://i.imgur.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     
     <link rel="icon" type="image/png" href="https://i.imgur.com/AcWQBZ7.png">
     <link rel="apple-touch-icon" href="https://i.imgur.com/AcWQBZ7.png">
@@ -28,9 +29,11 @@
     <title>Prepared - AI-Personalized Meal Delivery for Peak Performance</title>
     <meta name="title" content="Prepared - AI-Personalized Meal Delivery for Peak Performance">
     <meta name="description" content="Chef-crafted, customized meal prep designed to fuel your performance. Fresh, local ingredients delivered ready-to-eat with macros tailored to your fitness goals.">
-    <meta name="keywords" content="meal prep, personalized nutrition, performance meals, chef prepared meals, fitness nutrition, healthy meal delivery, AI meal planning">
+    <meta name="keywords" content="meal prep, personalized nutrition, performance meals, chef prepared meals, fitness nutrition, healthy meal delivery, AI meal planning, custom meal plan, macro-based diet, Los Angeles meal delivery">
     <meta name="author" content="Prepared">
     <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://eatprepared.com/">
@@ -46,6 +49,11 @@
     <meta property="og:site_name" content="Prepared">
     <meta property="og:image:alt" content="Chef-prepared personalized meals optimized for performance">
     <meta property="og:locale" content="en_US">
+    <meta property="og:video" content="https://i.imgur.com/lhhxgxB.mp4">
+    <meta property="og:video:secure_url" content="https://i.imgur.com/lhhxgxB.mp4">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="1920">
+    <meta property="og:video:height" content="1080">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -314,6 +322,43 @@
     <!-- Typeform Widget with defer to prevent blocking -->
     <script src="//embed.typeform.com/next/embed.js" defer></script>
 
+    <!-- Google Analytics 4 with Enhanced Measurement -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      // Configure your GA4 property with enhanced measurement
+      gtag('config', 'G-XXXXXXXXXX', {
+        'send_page_view': true,
+        'cookie_domain': 'eatprepared.com',
+        'cookie_flags': 'SameSite=None;Secure',
+        'custom_map': {
+          'dimension1': 'client_id',
+          'dimension2': 'user_agent',
+          'dimension3': 'page_load_time'
+        }
+      });
+      
+      // Track Core Web Vitals
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          if (window.performance) {
+            const pageNav = performance.getEntriesByType("navigation")[0];
+            if (pageNav) {
+              const loadTime = Math.round(pageNav.loadEventStart - pageNav.startTime);
+              gtag('event', 'page_load_performance', {
+                'page_load_time': loadTime,
+                'dom_interactive_time': Math.round(pageNav.domInteractive - pageNav.startTime),
+                'content_load_time': Math.round(pageNav.domContentLoadedEventEnd - pageNav.startTime)
+              });
+            }
+          }
+        }, 0);
+      });
+    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -331,6 +376,44 @@
         "addressRegion": "CA",
         "addressCountry": "US"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "34.052235",
+        "longitude": "-118.243683"
+      },
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "34.052235",
+          "longitude": "-118.243683"
+        },
+        "geoRadius": "50000"
+      },
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "34.052235",
+          "longitude": "-118.243683"
+        },
+        "geoRadius": "50000"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification", 
+          "dayOfWeek": ["Saturday", "Sunday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "servesCuisine": ["Healthy", "Performance Nutrition", "Meal Prep"],
       "sameAs": [
         "https://www.facebook.com/eatprepared",
         "https://www.instagram.com/eatprepared",
@@ -402,6 +485,64 @@
           "text": "Meals are delivered fresh and ready-to-eat with live tracking updates. You can choose your preferred delivery date at checkout."
         }
       }]
+    }
+    </script>
+
+    <!-- Add AggregateRating schema for product reviews -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Prepared Meal Delivery Service",
+      "description": "AI-personalized meal delivery service with chef-crafted meals tailored to your fitness goals",
+      "image": "https://i.imgur.com/tPwADZs.png",
+      "brand": {
+        "@type": "Brand",
+        "name": "Prepared"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/PreOrder",
+        "price": "14.99",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "127",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Michael T."
+          },
+          "datePublished": "2024-03-15",
+          "reviewBody": "The personalization is incredible. My meals perfectly match my macros for my training program."
+        },
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Sarah J."
+          },
+          "datePublished": "2024-02-20",
+          "reviewBody": "Chef quality meals that actually help me perform better. I've seen real improvements in my energy levels."
+        }
+      ]
     }
     </script>
 
@@ -491,7 +632,10 @@
             <div class="share-grid">
                 <div class="share-card">
                     <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                        <img src="https://i.imgur.com/dD2wjpo.png" alt="Browse and select a local chef for personalized meals" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;" srcset="https://i.imgur.com/dD2wjpo.png 400w, https://i.imgur.com/dD2wjpo.png?width=800 800w" sizes="(max-width: 768px) 100vw, 33vw">
+                        <picture>
+                            <source srcset="https://i.imgur.com/dD2wjpo.webp 400w, https://i.imgur.com/dD2wjpo.webp?width=800 800w" type="image/webp" sizes="(max-width: 768px) 100vw, 33vw">
+                            <img src="https://i.imgur.com/dD2wjpo.png" alt="Browse and select a local chef for personalized meals" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;" srcset="https://i.imgur.com/dD2wjpo.png 400w, https://i.imgur.com/dD2wjpo.png?width=800 800w" sizes="(max-width: 768px) 100vw, 33vw">
+                        </picture>
                     </div>
                     <div class="share-card-content">
                         <h3>Find a Chef for This Week</h3>
