@@ -304,118 +304,1661 @@
                 page-break-inside: avoid;
             }
         }
-    </style>
-
-    <!-- Preload key resources -->
-    <link rel="preload" href="https://i.imgur.com/lhhxgxB.webp" as="image" fetchpriority="high" imagesizes="100vw" imagesrcset="https://i.imgur.com/lhhxgxB.webp 800w, https://i.imgur.com/lhhxgxB.webp?width=1200 1200w, https://i.imgur.com/lhhxgxB.webp?width=1920 1920w" type="image/webp">
-    
-    <!-- Load non-critical CSS with lower priority -->
-    <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'; this.onload=null;">
-    <noscript><link rel="stylesheet" href="styles.min.css"></noscript>
-    
-    <!-- Load fonts asynchronously with optimized loading -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;" crossorigin>
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" crossorigin></noscript>
-    
-    <!-- FontAwesome removed - using inline SVG icons instead -->
-    
-    <!-- Typeform Widget with defer to prevent blocking -->
-    <script src="//embed.typeform.com/next/embed.js" defer></script>
-
-    <!-- Image optimization styles -->
-    <style>
-        /* Prevent layout shifts by properly sizing image containers */
-        .partner-image {
-            aspect-ratio: 1/1;
-            width: 80px;
-            height: 80px;
+        
+        /* Meal Journey Section Styles */
+        .meal-journey-container {
+            display: flex;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        .meal-journey-steps {flex: 1;}
+        .meal-journey-image {flex: 1;}
+        .journey-step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            overflow: hidden;
-            background-color: #f4f4f4;
+            font-weight: bold;
+            flex-shrink: 0;
         }
-        
-        .partner-image img,
-        .partner-image picture {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .share-image-container {
-            aspect-ratio: 4/3;
-            overflow: hidden;
-            position: relative;
-            background-color: #f4f4f4;
-            border-radius: 8px;
-        }
-        
-        .share-image-container img,
-        .share-image-container picture {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Hero image/video optimization */
-        .hero-image-container {
+        .journey-step:not(:last-child)::after {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+            left: 20px;
+            top: 40px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: rgba(34, 197, 94, 0.2);
+            transform: translateX(-50%);
         }
-        
-        .hero-poster {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+        .benefit-item {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
         }
+        .benefit-icon {color: var(--accent);}
         
-        .hero-poster img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-        
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 2;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 3;
-        }
-        
-        /* Hide video on mobile devices where autoplay is less reliable */
         @media (max-width: 768px) {
-            .hero-video {
+            .meal-journey-container {
+                flex-direction: column-reverse;
+                gap: 2rem;
+            }
+            .meal-journey-image {
+                margin: 0 auto;
+                max-width: 90%;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
                 display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Stats section icon styling */
+        .stat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-icon svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 5px rgba(45, 218, 107, 0.9));
+        }
+        
+        .stat-card:hover .stat-icon {
+            background-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: scale(1.05);
+        }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
             }
             .hero-poster {
                 display: block !important;
@@ -738,241 +2281,6 @@
             <path fill="#2DDA6B" d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/>
         </symbol>
     </svg>
-
-    <style>
-        /* Image optimization styles */
-        /* ... existing styles ... */
-
-        /* How It Works section styling */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .how-it-works {
-            padding: 3rem 0;
-            background-color: #fff;
-        }
-
-        .how-it-works h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            font-weight: 800;
-        }
-
-        .how-it-works-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Equal columns */
-            align-items: center;
-            gap: 2rem; /* Increased gap for better spacing */
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .how-it-works-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            padding-left: 2rem; /* Adds padding to move text towards center */
-        }
-
-        .step {
-            display: flex;
-            gap: 0.75rem;
-            transition: all 0.3s ease;
-        }
-
-        .step:hover {
-            transform: translateY(-5px);
-        }
-
-        .step-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 40px;
-            height: 40px;
-            background-color: #22C55E;
-            color: white;
-            border-radius: 50%;
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
-
-        .step-content {
-            flex: 1;
-            margin-top: -5px; /* Pull content up slightly */
-        }
-
-        .step h3 {
-            margin-bottom: 1rem; /* Increased spacing below the heading (from 0.5rem to 1rem) */
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        .step-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem; /* Increased spacing between bullet points (from 0.5rem to 0.75rem) */
-            padding-left: 10px; /* Added indentation for better visual hierarchy */
-        }
-
-        .step-list li {
-            display: flex;
-            gap: 0.5rem;
-            align-items: flex-start;
-            margin-bottom: 0.25rem; /* Added bottom margin for breathing room */
-        }
-
-        .check-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 22px;
-            height: 22px;
-            background-color: rgba(34, 197, 94, 0.15);
-            color: #22C55E;
-            border-radius: 50%;
-            font-weight: bold;
-            font-size: 0.8rem;
-            margin-top: 2px;
-        }
-
-        .step-list li div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .step-list li strong {
-            font-weight: 600;
-        }
-
-        .step-list li span {
-            color: #4B5563;
-        }
-
-        .how-it-works-image {
-            display: flex;
-            justify-content: center; /* Centers image horizontally */
-            align-items: center;
-            padding: 0;
-            background-color: transparent;
-            overflow: visible;
-            margin-left: 0; /* Remove negative margin for cleaner layout */
-        }
-
-        /* Simplified iPhone mockup styles */
-        .iphone-mockup {
-            display: block;
-            max-width: 300px; /* Increased from 262.5px (now ~15% smaller than original 350px) */
-            width: 100%;
-            height: auto;
-            margin: 0;
-            opacity: 0;
-            transform: translateX(20px);
-            transition: all 0.5s ease;
-            transition-delay: 0.4s;
-            border: none;
-            background: transparent;
-            box-shadow: none;
-            vertical-align: middle;
-        }
-
-        /* Animation states */
-        .iphone-mockup.animate {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .iphone-mockup.animate:hover {
-            transform: scale(1.02) translateY(-5px);
-            z-index: 10; /* Ensure the image stays on top when scaled */
-        }
-
-        /* Animation styles for steps */
-        .step {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            transition-delay: calc(var(--step-index, 0) * 0.1s + 0.1s);
-        }
-        
-        .step.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .step:nth-child(1) {
-            --step-index: 0;
-        }
-        
-        .step:nth-child(2) {
-            --step-index: 1;
-        }
-        
-        .step:nth-child(3) {
-            --step-index: 2;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 991px) {
-            .how-it-works-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .how-it-works-content {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .how-it-works-image {
-                order: -1;
-                justify-content: center;
-                margin-left: 0;
-                margin-bottom: -20px; /* Overlap slightly with steps */
-            }
-
-            .iphone-mockup {
-                max-width: 260px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .how-it-works {
-                padding: 2rem 0;
-            }
-
-            .how-it-works h2 {
-                font-size: 1.8rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .step {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-
-            .step-number {
-                margin-bottom: 0;
-            }
-        }
-
-        .iphone-mockup.animate {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .iphone-mockup.animate:hover {
-            transform: scale(1.02) translateY(-5px);
-        }
-    </style>
 </head>
 <body>
     <!-- Start of body - above-the-fold content begins -->
@@ -1039,86 +2347,97 @@
     </header>
 
     <main>
-        <section class="how-it-works section-transition light-to-dark">
-            <div class="container">
-                <h2>Your Meal Planning in 3 Steps</h2>
-                <div class="how-it-works-grid">
-                    <!-- Left Column: Steps -->
-                    <div class="how-it-works-content">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h3>Find Your Chef</h3>
-                                <ul class="step-list">
-                                    <li>
-                                        <span class="check-icon">✓</span>
-                                        <div>
-                                            <strong>Personalized Matches</strong>
-                                            <span>Chefs aligned with your goals</span>
+        <section class="share-section section-transition light-to-dark">
+            <h2>Your Meal Planning Journey in 3 Steps</h2>
+            <div class="meal-journey-container">
+                <div class="meal-journey-steps">
+                    <div class="journey-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Find a Chef for This Week</h3>
+                            <ul class="step-benefits">
+                                <li>
+                                    <div class="benefit-item">
+                                        <span class="benefit-icon">✓</span>
+                                        <div class="benefit-content">
+                                            <div class="benefit-title"><strong>Personalized Matches</strong></div>
+                                            <div class="benefit-description">AI suggests chefs based on your goals</div>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <span class="check-icon">✓</span>
-                                        <div>
-                                            <strong>Weekly Variety</strong>
-                                            <span>New local chefs every week</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="benefit-item">
+                                        <span class="benefit-icon">✓</span>
+                                        <div class="benefit-content">
+                                            <div class="benefit-title"><strong>Total Flexibility</strong></div>
+                                            <div class="benefit-description">Pick a new chef every week</div>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h3>Customize Meals</h3>
-                                <ul class="step-list">
-                                    <li>
-                                        <span class="check-icon">✓</span>
-                                        <div>
-                                            <strong>Tailored for You</strong>
-                                            <span>Meals crafted to fit your lifestyle</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="check-icon">✓</span>
-                                        <div>
-                                            <strong>Flexible & Easy</strong>
-                                            <span>Adjust choices anytime</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h3>Enjoy Delivery</h3>
-                                <ul class="step-list">
-                                    <li>
-                                        <span class="check-icon">✓</span>
-                                        <div>
-                                            <strong>Simple & Reliable</strong>
-                                            <span>Meals delivered straight to you</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="check-icon">✓</span>
-                                        <div>
-                                            <strong>Stress-Free</strong>
-                                            <span>No cooking or cleanup</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-
-                    <!-- Right Column: iPhone Image -->
-                    <div class="how-it-works-image">
-                        <img src="https://i.imgur.com/dD2wjpo.png" alt="Prepared meal planning app showing chef selection, meal planning, and order tracking" loading="lazy" width="375" height="812" fetchpriority="low" class="iphone-mockup">
+                    
+                    <div class="journey-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Pick a Meal Plan That Fits You</h3>
+                            <ul class="step-benefits">
+                                <li>
+                                    <div class="benefit-item">
+                                        <span class="benefit-icon">✓</span>
+                                        <div class="benefit-content">
+                                            <div class="benefit-title"><strong>Tailored to Your Goals</strong></div>
+                                            <div class="benefit-description">Meals match your macros & diet</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="benefit-item">
+                                        <span class="benefit-icon">✓</span>
+                                        <div class="benefit-content">
+                                            <div class="benefit-title"><strong>Easy Swaps</strong></div>
+                                            <div class="benefit-description">Change meals or switch chefs anytime</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    
+                    <div class="journey-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Checkout & Track Your Order</h3>
+                            <ul class="step-benefits">
+                                <li>
+                                    <div class="benefit-item">
+                                        <span class="benefit-icon">✓</span>
+                                        <div class="benefit-content">
+                                            <div class="benefit-title"><strong>Fast Checkout</strong></div>
+                                            <div class="benefit-description">Pay instantly with Apple Pay or card</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="benefit-item">
+                                        <span class="benefit-icon">✓</span>
+                                        <div class="benefit-content">
+                                            <div class="benefit-title"><strong>Live Tracking</strong></div>
+                                            <div class="benefit-description">See when your meals will arrive</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal-journey-image">
+                    <picture>
+                        <source srcset="https://i.imgur.com/XrvqCcP.webp" type="image/webp">
+                        <img src="https://i.imgur.com/XrvqCcP.png" alt="Prepared meal planning app showing the three step journey" loading="lazy" width="600" height="800" fetchpriority="low" style="width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);">
+                    </picture>
                 </div>
             </div>
         </section>
@@ -1843,39 +3162,227 @@
                     element.classList.add('animate-visible');
                 });
             }
-            
-            // Animate steps when they come into view
-            const animateSteps = () => {
-                const stepsObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const steps = document.querySelectorAll('.step');
-                            steps.forEach(step => {
-                                step.classList.add('animate');
+        });
+        
+        // Load advanced animations and effects after everything else
+        window.addEventListener('load', () => {
+            // Wait to ensure all critical content is loaded
+            setTimeout(() => {
+                // Mobile CTA visibility optimized with passive event listener
+                const mobileCTA = document.querySelector('.mobile-cta');
+                const isMobile = window.matchMedia('(max-width: 768px)').matches;
+                let lastScrollTop = 0;
+                let ctaTicking = false;
+                
+                if (mobileCTA && isMobile) {
+                    // Use passive event listener for better scroll performance
+                    window.addEventListener('scroll', () => {
+                        if (!ctaTicking) {
+                            requestAnimationFrame(() => {
+                                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                                const isScrollingDown = scrollTop > lastScrollTop;
+                                const isTopOfPage = scrollTop < 100;
+
+                                if (isScrollingDown && !isTopOfPage) {
+                                    mobileCTA.classList.add('mobile-cta-visible');
+                                } else {
+                                    mobileCTA.classList.remove('mobile-cta-visible');
+                                }
+
+                                lastScrollTop = scrollTop;
+                                ctaTicking = false;
                             });
-                            
-                            // Animate iPhone mockup
-                            const iphone = document.querySelector('.iphone-mockup');
-                            if (iphone) {
-                                iphone.classList.add('animate');
+                            ctaTicking = true;
+                        }
+                    }, { passive: true }); // Add passive flag for better performance
+                }
+
+                // Parallax scroll effect for hero section (optimized with requestAnimationFrame) - desktop only
+                if (!isMobile) {
+                    let lastScrollY = window.scrollY;
+                    const hero = document.querySelector('.hero');
+                    let ticking = false;
+                    
+                    if (hero) {
+                        window.addEventListener('scroll', () => {
+                            if (!ticking) {
+                                requestAnimationFrame(() => {
+                                    const scrollY = window.scrollY;
+                                    if (scrollY > 0 && scrollY < window.innerHeight) {
+                                        const offset = scrollY * 0.5;
+                                        hero.style.setProperty('--scroll-offset', `${offset}px`);
+                                        hero.classList.add('scrolling');
+                                    } else {
+                                        hero.classList.remove('scrolling');
+                                    }
+                                    lastScrollY = scrollY;
+                                    ticking = false;
+                                });
+                                ticking = true;
                             }
-                            
-                            // Stop observing once triggered
-                            stepsObserver.disconnect();
+                        }, { passive: true });
+                    }
+                }
+                
+                // Smooth scroll for navigation links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            const headerOffset = 80;
+                            const elementPosition = target.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition - headerOffset;
+
+                            window.scrollBy({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
                         }
                     });
-                }, {
-                    threshold: 0.1
                 });
-                
-                const howItWorksSection = document.querySelector('.how-it-works');
-                if (howItWorksSection) {
-                    stepsObserver.observe(howItWorksSection);
+            }, 100); // Small delay to ensure critical content is handled first
+        }, { once: true }); // Only run once
+    </script>
+    
+    <!-- Lazy loading polyfill -->
+    <script defer>
+        window.addEventListener('load', function() {
+            // Only run if needed
+            if ('IntersectionObserver' in window && !('loading' in HTMLImageElement.prototype)) {
+                // Create an observer for images
+                const imgObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const dataSrc = img.getAttribute('data-src');
+                            if (dataSrc) {
+                                img.src = dataSrc;
+                                img.removeAttribute('data-src');
+                            }
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                // Apply to all images with loading="lazy"
+                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                    // Backup the original src
+                    if (!img.hasAttribute('data-src')) {
+                        img.setAttribute('data-src', img.src);
+                        // Use a small placeholder or data URI
+                        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+                        // Observe the image
+                        imgObserver.observe(img);
+                    }
+                });
+            }
+        }, { once: true }); // Only run once
+    </script>
+    
+    <!-- <script src="cloudinary_config.js" defer></script> -->
+    
+    <!-- Typeform initialization -->
+    <script defer>
+        // Initialize Typeform after page load
+        window.addEventListener('load', () => {
+            // Make sure Typeform elements are initialized properly
+            if (window.tf && typeof window.tf.createWidget === 'function') {
+                const widgets = document.querySelectorAll('[data-tf-live]');
+                if (widgets.length > 0) {
+                    console.log('Typeform widgets detected:', widgets.length);
                 }
+            }
+        }, { once: true });
+    </script>
+
+    <!-- Low-priority features - only loaded after page is fully rendered -->
+    <script defer>
+        window.addEventListener('load', () => {
+            // Initialize countdown timer with requestAnimationFrame for better performance
+            const updateCountdown = () => {
+                const endDate = new Date('2025-04-12T06:59:59Z').getTime();
+                
+                // Use less frequent updates on mobile
+                const isMobile = window.matchMedia('(max-width: 768px)').matches;
+                const updateInterval = isMobile ? 10000 : 1000; // 10 seconds on mobile, 1 second on desktop
+                
+                const updateTimer = () => {
+                    const currentTime = new Date().getTime();
+                    const difference = endDate - currentTime;
+                    
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                    
+                    const daysElement = document.getElementById('countdown-days');
+                    const hoursElement = document.getElementById('countdown-hours');
+                    const minutesElement = document.getElementById('countdown-minutes');
+                    const secondsElement = document.getElementById('countdown-seconds');
+                    
+                    if (daysElement) daysElement.textContent = String(days).padStart(2, '0');
+                    if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
+                    if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
+                    if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
+                    
+                    // Use requestAnimationFrame instead of setInterval for better performance
+                    if (difference > 0) {
+                        // Only update once per second to save CPU on mobile
+                        setTimeout(() => requestAnimationFrame(updateTimer), updateInterval);
+                    }
+                }
+                
+                updateTimer();
             };
             
-            // Run animations
-            animateSteps();
+            // Initialize countdown if elements exist
+            if (document.getElementById('countdown-days')) {
+                updateCountdown();
+            }
+            
+            // Detect if device is low-end or mobile
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            const isLowEndDevice = () => {
+                // Check for low memory (less than 2GB)
+                if (navigator.deviceMemory && navigator.deviceMemory < 2) return true;
+                
+                // Check for low-end CPU (older/slower devices)
+                if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) return true;
+                
+                return false;
+            };
+            
+            // Initialize Intersection Observer for animations only on desktop or high-end devices
+            if (!isMobile && !isLowEndDevice() && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const animationObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-visible');
+                            
+                            // Add card index for staggered animations
+                            const cards = entry.target.querySelectorAll('.benefit-card, .testimonial-card');
+                            cards.forEach((card, index) => {
+                                card.style.setProperty('--card-index', index);
+                            });
+                        }
+                    });
+                }, { 
+                    root: null, 
+                    rootMargin: '0px', 
+                    threshold: 0.1  // Lower threshold to improve performance
+                });
+                
+                // Observe all animated sections
+                document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
+                    animationObserver.observe(element);
+                });
+            } else {
+                // For mobile or low-end devices, just show everything without animations
+                document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
+                    element.classList.add('animate-visible');
+                });
+            }
         });
         
         // Image optimization functions
