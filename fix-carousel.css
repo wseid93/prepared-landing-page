@@ -1,0 +1,121 @@
+/* Reset for partners carousel */
+.partners-scroll {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 2rem 0;
+    margin: 0 auto;
+    background: #000;
+}
+
+.partners-track {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    width: 100%;
+    animation: none; /* Remove the animation for now */
+}
+
+.partners-track::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+/* Fix card layout */
+.partner-card {
+    flex: 0 0 auto;
+    width: 280px;
+    max-width: 90%;
+    margin-right: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fix card header layout */
+.partner-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.partner-image {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.partner-image img,
+.partner-image picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.partner-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.partner-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #22C55E;
+    font-weight: 600;
+}
+
+.partner-title {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.partner-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Navigation buttons */
+.partners-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    pointer-events: none;
+}
+
+.partners-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.9);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    pointer-events: auto;
+    border: none;
+}
+
+.partners-button:hover {
+    background: rgba(34, 197, 94, 1);
+    transform: scale(1.05);
+} 
