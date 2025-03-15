@@ -2,7 +2,7 @@
 <html lang="en" class="smooth-scroll">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     
     <!-- Resource hints for image loading -->
     <meta http-equiv="Accept-CH" content="DPR, Width, Viewport-Width">
@@ -19,9 +19,47 @@
     <link rel="preconnect" href="https://i.imgur.com" crossorigin>
     
     <link rel="icon" type="image/png" href="https://i.imgur.com/AcWQBZ7.png">
+    <link rel="apple-touch-icon" href="https://i.imgur.com/AcWQBZ7.png">
 
     <!-- Add PWA enhancement -->
     <link rel="manifest" href="/manifest.json">
+
+    <!-- Primary Meta Tags -->
+    <title>Prepared - AI-Personalized Meal Delivery for Peak Performance</title>
+    <meta name="title" content="Prepared - AI-Personalized Meal Delivery for Peak Performance">
+    <meta name="description" content="Chef-crafted, customized meal prep designed to fuel your performance. Fresh, local ingredients delivered ready-to-eat with macros tailored to your fitness goals.">
+    <meta name="keywords" content="meal prep, personalized nutrition, performance meals, chef prepared meals, fitness nutrition, healthy meal delivery, AI meal planning">
+    <meta name="author" content="Prepared">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://eatprepared.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eatprepared.com/">
+    <meta property="og:title" content="Prepared - AI-Personalized Meal Delivery for Peak Performance">
+    <meta property="og:description" content="Chef-crafted, customized meal prep designed to fuel your performance. Fresh, local ingredients delivered ready-to-eat with macros tailored to your fitness goals.">
+    <meta property="og:image" content="https://i.imgur.com/tPwADZs.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Prepared">
+    <meta property="og:image:alt" content="Chef-prepared personalized meals optimized for performance">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://eatprepared.com/">
+    <meta name="twitter:title" content="Prepared - AI-Personalized Meal Delivery for Peak Performance">
+    <meta name="twitter:description" content="Chef-crafted, customized meal prep designed to fuel your performance. Fresh, local ingredients delivered ready-to-eat with macros tailored to your fitness goals.">
+    <meta name="twitter:image" content="https://i.imgur.com/tPwADZs.png">
+    <meta name="twitter:image:alt" content="Chef-prepared personalized meals optimized for performance">
+
+    <!-- iOS Specific -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Prepared">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Critical CSS inlined -->
     <style>
@@ -129,6 +167,79 @@
                 height: auto;
                 display: block;
             }
+            
+            /* Mobile-specific styles for better readability */
+            h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            h2 {
+                font-size: 2rem;
+                line-height: 1.25;
+            }
+            h3 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+            p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .two-column-grid {
+                grid-template-columns: 1fr;
+            }
+            .share-grid, .benefits-grid, .stats-grid, .faq-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        /* Medium screens */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-content {
+                max-width: 800px;
+            }
+            .share-grid, .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            h1 {
+                font-size: 3rem;
+            }
+            h2 {
+                font-size: 2.25rem;
+            }
+        }
+        
+        /* Large screens */
+        @media (min-width: 1025px) {
+            .hero-content {
+                max-width: 1000px;
+            }
+            h1 {
+                font-size: 3.5rem;
+            }
+            button, 
+            [role="button"],
+            a {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            button:hover, 
+            [role="button"]:hover,
+            a:hover {
+                transform: translateY(-2px);
+            }
         }
         
         /* Stats section icon styling */
@@ -156,44 +267,38 @@
             box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
             transform: scale(1.05);
         }
+        
+        /* Print styles for accessibility */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            .hero {
+                height: auto;
+                min-height: auto;
+                background: white;
+                color: black;
+            }
+            .hero-video, .hero-image-container, .exit-popup, .exit-popup-overlay, .mobile-cta, .navbar, [data-tf-live] {
+                display: none !important;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+            .hero-content, .share-section, .partners-showcase, .benefits, .stats, .faq, footer {
+                page-break-inside: avoid;
+            }
+        }
     </style>
 
-<!-- Primary Meta Tags -->
-<meta name="title" content="Personalized Chef-Made Meal Prep">
-<meta name="description" content="Discover personalized, chef-crafted meal prep tailored to your dietary needs and fitness goals. Fresh, locally sourced meals delivered ready-to-eat.">
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://eatprepared.com/">
-<meta property="og:title" content="Personalized Chef-Made Meal Prep">
-<meta property="og:description" content="Discover personalized, chef-crafted meal prep designed to fuel your busy lifestyle. Enjoy fresh, locally sourced meals delivered right to your door—experience convenience and culinary excellence.">
-<meta property="og:image" content="https://i.imgur.com/tPwADZs.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="Prepared">
-
-<!-- WhatsApp/iMessage Enhancements -->
-<meta property="og:image:alt" content="Personalized Chef-Made Meal Prep">
-<meta property="og:locale" content="en_US">
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://eatprepared.com/">
-<meta name="twitter:title" content="Personalized Chef-Made Meal Prep">
-<meta name="twitter:description" content="Discover personalized, chef-crafted meal prep designed to fuel your busy lifestyle. Enjoy fresh, locally sourced meals delivered right to your door—experience convenience and culinary excellence.">
-<meta name="twitter:image" content="https://i.imgur.com/tPwADZs.png">
-<meta name="twitter:image:alt" content="Personalized chef-made meals, powered by AI">
-
-<!-- iOS Specific -->
-<meta name="format-detection" content="telephone=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Prepared">
-
-    <title>Prepared - AI-Personalized Meal Delivery</title>
-    <link rel="canonical" href="https://eatprepared.com/">
-    
     <!-- Preload key resources -->
-    <link rel="preload" href="https://i.imgur.com/lhhxgxB.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="https://i.imgur.com/lhhxgxB.jpg" as="image" fetchpriority="high" imagesizes="100vw">
     
     <!-- Load non-critical CSS with lower priority -->
     <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'">
@@ -201,8 +306,8 @@
     
     <!-- Load fonts asynchronously with optimized loading -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
     
     <!-- FontAwesome removed - using inline SVG icons instead -->
     
@@ -212,11 +317,48 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "FoodEstablishment",
+      "@type": "FoodEstablishment", 
       "name": "Prepared",
-      "description": "Discover personalized, chef-crafted meal prep tailored to your dietary needs and fitness goals.",
+      "description": "Chef-crafted, customized meal prep designed to fuel your performance with macros tailored to your fitness goals.",
       "url": "https://eatprepared.com/",
-      "image": "https://i.imgur.com/tPwADZs.png"
+      "image": "https://i.imgur.com/tPwADZs.png",
+      "telephone": "(714) 296-9327",
+      "email": "wes@eatprepared.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Los Angeles",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.facebook.com/eatprepared",
+        "https://www.instagram.com/eatprepared",
+        "https://twitter.com/eatprepared"
+      ],
+      "potentialAction": {
+        "@type": "OrderAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://eatprepared.com/",
+          "inLanguage": "en-US",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/IOSPlatform",
+            "http://schema.org/AndroidPlatform"
+          ]
+        },
+        "deliveryMethod": [
+          "http://purl.org/goodrelations/v1#DeliveryModeOwnFleet"
+        ],
+        "expectsAcceptanceOf": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Personalized Meal Delivery"
+          }
+        }
+      }
     }
     </script>
 
@@ -237,6 +379,27 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, you have full control over chefs, meal types, macros, and dietary preferences every week."
+        }
+      }, {
+        "@type": "Question",
+        "name": "When will I get access?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We're launching in Los Angeles in Spring 2025. Early access members receive invitations in order of signup, with waitlist members getting priority access."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is there a minimum commitment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No long-term commitments required. You can pause, skip, or cancel anytime with no cancellation fees."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How does delivery work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Meals are delivered fresh and ready-to-eat with live tracking updates. You can choose your preferred delivery date at checkout."
         }
       }]
     }
@@ -295,25 +458,27 @@
                 width="1920"
                 height="1080"
                 style="display: none;"
+                aria-label="Chef preparing personalized meals in a professional kitchen"
                 onloadedmetadata="this.style.display='block'">
                 <source src="https://i.imgur.com/lhhxgxB.mp4" type="video/mp4">
+                <p>Your browser doesn't support HTML5 video. Here's a <a href="https://i.imgur.com/lhhxgxB.jpg">link to the poster image</a> instead.</p>
             </video>
         </div>
         <div class="hero-content">
             <h1>Meals That<br>Fuel Your Ambition</h1>
             <p class="subheadline">Personalized nutrition for energy, focus, and performance</p>
             <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Local Chefs</span>
+                <div class="stat-item" itemscope itemtype="https://schema.org/Offer">
+                    <span class="stat-number" itemprop="name">50+</span>
+                    <span class="stat-label" itemprop="description">Local Chefs</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">Autopilot</span>
-                    <span class="stat-label">Meal Planning</span>
+                <div class="stat-item" itemscope itemtype="https://schema.org/Offer">
+                    <span class="stat-number" itemprop="name">Autopilot</span>
+                    <span class="stat-label" itemprop="description">Meal Planning</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">10,000+</span>
-                    <span class="stat-label">Personalized Meals</span>
+                <div class="stat-item" itemscope itemtype="https://schema.org/Offer">
+                    <span class="stat-number" itemprop="name">10,000+</span>
+                    <span class="stat-label" itemprop="description">Personalized Meals</span>
                 </div>
             </div>
             <div data-tf-live="01JKCR97WBT8JFCGH2EX1Z2M0J"></div>
@@ -326,7 +491,7 @@
             <div class="share-grid">
                 <div class="share-card">
                     <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                        <img src="https://i.imgur.com/dD2wjpo.png" alt="Social sharing example" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;">
+                        <img src="https://i.imgur.com/dD2wjpo.png" alt="Browse and select a local chef for personalized meals" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;" srcset="https://i.imgur.com/dD2wjpo.png 400w, https://i.imgur.com/dD2wjpo.png?width=800 800w" sizes="(max-width: 768px) 100vw, 33vw">
                     </div>
                     <div class="share-card-content">
                         <h3>Find a Chef for This Week</h3>
@@ -349,7 +514,7 @@
 
                 <div class="share-card">
                     <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                        <img src="https://i.imgur.com/5qtjtPC.png" alt="Healthcare sharing example" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;">
+                        <img src="https://i.imgur.com/5qtjtPC.png" alt="Select a personalized meal plan tailored to your fitness goals" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;" srcset="https://i.imgur.com/5qtjtPC.png 400w, https://i.imgur.com/5qtjtPC.png?width=800 800w" sizes="(max-width: 768px) 100vw, 33vw">
                     </div>
                     <div class="share-card-content">
                         <h3>Pick a Meal Plan That Fits You</h3>
@@ -372,7 +537,7 @@
 
                 <div class="share-card">
                     <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                        <img src="https://i.imgur.com/myhrFjr.png" alt="Teams example" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;">
+                        <img src="https://i.imgur.com/myhrFjr.png" alt="Complete checkout and track your meal delivery in real time" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;" srcset="https://i.imgur.com/myhrFjr.png 400w, https://i.imgur.com/myhrFjr.png?width=800 800w" sizes="(max-width: 768px) 100vw, 33vw">
                     </div>
                     <div class="share-card-content">
                         <h3>Checkout & Track Your Order</h3>
@@ -403,187 +568,187 @@
                 <div class="partners-scroll">
                     <div class="partners-track">
                         <!-- Original Cards -->
-                        <div class="partner-card chef-card">
+                        <div class="partner-card chef-card" itemscope itemtype="https://schema.org/Person">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition, Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;">
+                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Chef Jonathan</h3>
-                                    <span class="partner-title">Newport Beach</span>
+                                    <h3 itemprop="name">Chef Jonathan</h3>
+                                    <span class="partner-title" itemprop="jobTitle">Newport Beach</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Executive Chef at Platinum Bite, 15+ years at Four Seasons and Montage, serving NFL and Olympic athletes.</p>
+                            <p class="partner-description" itemprop="description">Executive Chef at Platinum Bite, 15+ years at Four Seasons and Montage, serving NFL and Olympic athletes.</p>
                         </div>
 
-                        <div class="partner-card chef-card">
+                        <div class="partner-card chef-card" itemscope itemtype="https://schema.org/Person">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;">
+                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander - Certified nutritionist and chef from Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Chef Alexander</h3>
-                                    <span class="partner-title">Los Angeles</span>
+                                    <h3 itemprop="name">Chef Alexander</h3>
+                                    <span class="partner-title" itemprop="jobTitle">Los Angeles</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Certified nutritionist and chef, pioneering the intersection of gourmet cooking and sports nutrition.</p>
+                            <p class="partner-description" itemprop="description">Certified nutritionist and chef, pioneering the intersection of gourmet cooking and sports nutrition.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/Uno4TR4.png" alt="Chef Moises" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/Uno4TR4.png" alt="Chef Moises - Sustainable local farm provider from Gardena" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Chef Moises</h3>
-                                    <span class="partner-title">Gardena</span>
+                                    <h3 itemprop="name">Chef Moises</h3>
+                                    <span class="partner-title" itemprop="location">Gardena</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Network of sustainable local farms providing fresh, organic ingredients for peak nutrition.</p>
+                            <p class="partner-description" itemprop="description">Network of sustainable local farms providing fresh, organic ingredients for peak nutrition.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/52OMvzu.png" alt="Lean Mean Meal Prep" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/52OMvzu.png" alt="Lean Mean Meal Prep - Premium meal preparation service in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Lean Mean Meal Prep</h3>
-                                    <span class="partner-title">Los Angeles</span>
+                                    <h3 itemprop="name">Lean Mean Meal Prep</h3>
+                                    <span class="partner-title" itemprop="location">Los Angeles</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
+                            <p class="partner-description" itemprop="description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/OwiW1oY.png" alt="Fresh Off The Boat" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/OwiW1oY.png" alt="Fresh Off The Boat - Seafood and nutrition partner in Costa Mesa" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Fresh Off The Boat</h3>
-                                    <span class="partner-title">Costa Mesa</span>
+                                    <h3 itemprop="name">Fresh Off The Boat</h3>
+                                    <span class="partner-title" itemprop="location">Costa Mesa</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
+                            <p class="partner-description" itemprop="description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/07wOkmX.png" alt="80/20 Fitness" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/07wOkmX.png" alt="80/20 Fitness - Fitness and nutrition partner in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>80/20 Fitness</h3>
-                                    <span class="partner-title">Los Angeles</span>
+                                    <h3 itemprop="name">80/20 Fitness</h3>
+                                    <span class="partner-title" itemprop="location">Los Angeles</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
+                            <p class="partner-description" itemprop="description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/dk8y4Hp.png" alt="OC FIT" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/dk8y4Hp.png" alt="OC FIT - Fitness and nutrition partner in Anaheim" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>OC FIT</h3>
-                                    <span class="partner-title">Anaheim</span>
+                                    <h3 itemprop="name">OC FIT</h3>
+                                    <span class="partner-title" itemprop="location">Anaheim</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Providing 100% biodegradable packaging solutions for environmentally conscious delivery.</p>
+                            <p class="partner-description" itemprop="description">Providing 100% biodegradable packaging solutions for environmentally conscious delivery.</p>
                         </div>
 
                         <!-- Duplicate Cards for Seamless Scroll -->
-                        <div class="partner-card chef-card">
+                        <div class="partner-card chef-card" itemscope itemtype="https://schema.org/Person">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition, Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;">
+                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Chef Jonathan</h3>
-                                    <span class="partner-title">Executive Chef</span>
+                                    <h3 itemprop="name">Chef Jonathan</h3>
+                                    <span class="partner-title" itemprop="jobTitle">Executive Chef</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Former head chef at Michelin-starred restaurants, specializing in fusion cuisine and performance nutrition.</p>
+                            <p class="partner-description" itemprop="description">Former head chef at Michelin-starred restaurants, specializing in fusion cuisine and performance nutrition.</p>
                         </div>
 
-                        <div class="partner-card chef-card">
+                        <div class="partner-card chef-card" itemscope itemtype="https://schema.org/Person">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;">
+                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander - Certified nutritionist and chef from Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Chef Alexander</h3>
-                                    <span class="partner-title">Nutrition Director</span>
+                                    <h3 itemprop="name">Chef Alexander</h3>
+                                    <span class="partner-title" itemprop="jobTitle">Nutrition Director</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Certified nutritionist and chef, pioneering the intersection of gourmet cooking and sports nutrition.</p>
+                            <p class="partner-description" itemprop="description">Certified nutritionist and chef, pioneering the intersection of gourmet cooking and sports nutrition.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/Uno4TR4.png" alt="Chef Moises" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/Uno4TR4.png" alt="Chef Moises - Sustainable local farm provider from Gardena" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Chef Moises</h3>
-                                    <span class="partner-title">Premium Ingredients</span>
+                                    <h3 itemprop="name">Chef Moises</h3>
+                                    <span class="partner-title" itemprop="location">Premium Ingredients</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Network of sustainable local farms providing fresh, organic ingredients for peak nutrition.</p>
+                            <p class="partner-description" itemprop="description">Network of sustainable local farms providing fresh, organic ingredients for peak nutrition.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/52OMvzu.png" alt="Lean Mean Meal Prep" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/52OMvzu.png" alt="Lean Mean Meal Prep - Premium meal preparation service in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Lean Mean Meal Prep</h3>
-                                    <span class="partner-title">Research Partner</span>
+                                    <h3 itemprop="name">Lean Mean Meal Prep</h3>
+                                    <span class="partner-title" itemprop="location">Research Partner</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
+                            <p class="partner-description" itemprop="description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/OwiW1oY.png" alt="Fresh Off The Boat" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/OwiW1oY.png" alt="Fresh Off The Boat - Seafood and nutrition partner in Costa Mesa" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>Fresh Off The Boat</h3>
-                                    <span class="partner-title">Research Partner</span>
+                                    <h3 itemprop="name">Fresh Off The Boat</h3>
+                                    <span class="partner-title" itemprop="location">Research Partner</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
+                            <p class="partner-description" itemprop="description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/07wOkmX.png" alt="80/20 Fitness" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/07wOkmX.png" alt="80/20 Fitness - Fitness and nutrition partner in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>80/20 Fitness</h3>
-                                    <span class="partner-title">Research Partner</span>
+                                    <h3 itemprop="name">80/20 Fitness</h3>
+                                    <span class="partner-title" itemprop="location">Research Partner</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
+                            <p class="partner-description" itemprop="description">Leading nutrition research facility helping optimize our meals for maximum performance benefits.</p>
                         </div>
 
-                        <div class="partner-card brand-card">
+                        <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/dk8y4Hp.png" alt="OC FIT" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/dk8y4Hp.png" alt="OC FIT - Fitness and nutrition partner in Anaheim" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
                                 </div>
                                 <div class="partner-info">
-                                    <h3>OC FIT</h3>
-                                    <span class="partner-title">Sustainability Partner</span>
+                                    <h3 itemprop="name">OC FIT</h3>
+                                    <span class="partner-title" itemprop="location">Sustainability Partner</span>
                                 </div>
                             </div>
-                            <p class="partner-description">Providing 100% biodegradable packaging solutions for environmentally conscious delivery.</p>
+                            <p class="partner-description" itemprop="description">Providing 100% biodegradable packaging solutions for environmentally conscious delivery.</p>
                         </div>
                     </div>
                 </div>
@@ -593,41 +758,41 @@
         <section class="benefits section-transition light-to-dark">
             <h2>Why Join Prepared?</h2>
             <div class="benefits-grid">
-                <div class="benefit-card">
+                <div class="benefit-card" itemscope itemtype="https://schema.org/Service">
                     <div class="benefit-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>
                     </div>
                     <div class="benefit-content">
-                        <h3>Fully Personalized Meals</h3>
-                        <p>Our AI analyzes your preferences, dietary needs, and fitness goals to create perfectly tailored meals just for you. Experience true personalization that adapts as you do.</p>
+                        <h3 itemprop="name">Fully Personalized Meals</h3>
+                        <p itemprop="description">Our AI analyzes your preferences, dietary needs, and fitness goals to create perfectly tailored meals just for you. Experience true personalization that adapts as you do.</p>
                     </div>
                 </div>
                 
-                <div class="benefit-card">
+                <div class="benefit-card" itemscope itemtype="https://schema.org/Service">
                     <div class="benefit-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                     </div>
                     <div class="benefit-content">
-                        <h3>Convenient & Ready-to-Eat</h3>
-                        <p>Skip the meal prep hassle. Our chef-crafted meals arrive ready to heat and enjoy. Save time without compromising on quality or nutrition.</p>
+                        <h3 itemprop="name">Convenient & Ready-to-Eat</h3>
+                        <p itemprop="description">Skip the meal prep hassle. Our chef-crafted meals arrive ready to heat and enjoy. Save time without compromising on quality or nutrition.</p>
                     </div>
                 </div>
                 
-                <div class="benefit-card">
+                <div class="benefit-card" itemscope itemtype="https://schema.org/Service">
                     <div class="benefit-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
                     </div>
                     <div class="benefit-content">
-                        <h3>Performance-Optimized Nutrition</h3>
-                        <p>Every meal is scientifically designed to fuel your performance. Get the perfect balance of macros and nutrients to reach your peak potential.</p>
+                        <h3 itemprop="name">Performance-Optimized Nutrition</h3>
+                        <p itemprop="description">Every meal is scientifically designed to fuel your performance. Get the perfect balance of macros and nutrients to reach your peak potential.</p>
                     </div>
                 </div>
             </div>
@@ -645,41 +810,41 @@
                 <div class="stats-column">
                     <h3>Recovery Made Easy</h3>
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card" itemscope itemtype="https://schema.org/QuantitativeValue">
                             <div class="stat-front">
-                                <div class="stat-icon">
+                                <div class="stat-icon" aria-hidden="true">
                                     <svg width="36" height="36"><use xlink:href="#icon-dumbbell"/></svg>
                                 </div>
                                 <div class="stat-content">
-                                    <div class="stat-highlight">23% Faster</div>
-                                    <div class="stat-title">Strength Recovery</div>
-                                    <div class="stat-details">Right protein/carb mix helps you bounce back quicker after intense workouts.</div>
+                                    <div class="stat-highlight" itemprop="value">23% Faster</div>
+                                    <div class="stat-title" itemprop="name">Strength Recovery</div>
+                                    <div class="stat-details" itemprop="description">Right protein/carb mix helps you bounce back quicker after intense workouts.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card" itemscope itemtype="https://schema.org/QuantitativeValue">
                             <div class="stat-front">
-                                <div class="stat-icon">
+                                <div class="stat-icon" aria-hidden="true">
                                     <svg width="36" height="36"><use xlink:href="#icon-chart-line"/></svg>
                                 </div>
                                 <div class="stat-content">
-                                    <div class="stat-highlight">10% More</div>
-                                    <div class="stat-title">Power Output</div>
-                                    <div class="stat-details">Mediterranean-style diet boosts endurance and strength output by 10%.</div>
+                                    <div class="stat-highlight" itemprop="value">10% More</div>
+                                    <div class="stat-title" itemprop="name">Power Output</div>
+                                    <div class="stat-details" itemprop="description">Mediterranean-style diet boosts endurance and strength output by 10%.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card" itemscope itemtype="https://schema.org/QuantitativeValue">
                             <div class="stat-front">
-                                <div class="stat-icon">
+                                <div class="stat-icon" aria-hidden="true">
                                     <svg width="36" height="36"><use xlink:href="#icon-ban"/></svg>
                                 </div>
                                 <div class="stat-content">
-                                    <div class="stat-highlight">50% Less</div>
-                                    <div class="stat-title">Muscle Soreness</div>
-                                    <div class="stat-details">Proper nutrition significantly reduces post-workout soreness and speeds up recovery.</div>
+                                    <div class="stat-highlight" itemprop="value">50% Less</div>
+                                    <div class="stat-title" itemprop="name">Muscle Soreness</div>
+                                    <div class="stat-details" itemprop="description">Proper nutrition significantly reduces post-workout soreness and speeds up recovery.</div>
                                 </div>
                             </div>
                         </div>
@@ -690,41 +855,41 @@
                 <div class="stats-column">
                     <h3>Performance Gains You Can Feel</h3>
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card" itemscope itemtype="https://schema.org/QuantitativeValue">
                             <div class="stat-front">
-                                <div class="stat-icon">
+                                <div class="stat-icon" aria-hidden="true">
                                     <svg width="36" height="36"><use xlink:href="#icon-bolt"/></svg>
                                 </div>
                                 <div class="stat-content">
-                                    <div class="stat-highlight">25% More</div>
-                                    <div class="stat-title">Sustained Energy</div>
-                                    <div class="stat-details">Healthy eaters experience fewer crashes and maintain energy longer throughout the day.</div>
+                                    <div class="stat-highlight" itemprop="value">25% More</div>
+                                    <div class="stat-title" itemprop="name">Sustained Energy</div>
+                                    <div class="stat-details" itemprop="description">Healthy eaters experience fewer crashes and maintain energy longer throughout the day.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card" itemscope itemtype="https://schema.org/QuantitativeValue">
                             <div class="stat-front">
-                                <div class="stat-icon">
+                                <div class="stat-icon" aria-hidden="true">
                                     <svg width="36" height="36"><use xlink:href="#icon-brain"/></svg>
                                 </div>
                                 <div class="stat-content">
-                                    <div class="stat-highlight">93% More</div>
-                                    <div class="stat-title">Mental Focus</div>
-                                    <div class="stat-details">Nutrient-dense meals boost mental clarity and productivity at work.</div>
+                                    <div class="stat-highlight" itemprop="value">93% More</div>
+                                    <div class="stat-title" itemprop="name">Mental Focus</div>
+                                    <div class="stat-details" itemprop="description">Nutrient-dense meals boost mental clarity and productivity at work.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card" itemscope itemtype="https://schema.org/QuantitativeValue">
                             <div class="stat-front">
-                                <div class="stat-icon">
+                                <div class="stat-icon" aria-hidden="true">
                                     <svg width="36" height="36"><use xlink:href="#icon-shield"/></svg>
                                 </div>
                                 <div class="stat-content">
-                                    <div class="stat-highlight">2.5 Years</div>
-                                    <div class="stat-title">Cognitive Protection</div>
-                                    <div class="stat-details">A brain-boosting diet slows memory decline by up to 2.5 years, keeping you sharper longer.</div>
+                                    <div class="stat-highlight" itemprop="value">2.5 Years</div>
+                                    <div class="stat-title" itemprop="name">Cognitive Protection</div>
+                                    <div class="stat-details" itemprop="description">A brain-boosting diet slows memory decline by up to 2.5 years, keeping you sharper longer.</div>
                                 </div>
                             </div>
                         </div>
@@ -738,6 +903,18 @@
                 <div data-tf-live="01JKCR97WBT8JFCGH2EX1Z2M0J"></div>
             </div>
         </section>
+
+        <!-- Add breadcrumb for better SEO -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav" style="display: none;">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="https://eatprepared.com/" itemprop="item">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+            </ol>
+        </nav>
 
         <section class="signup section-transition light-to-dark">
             <div class="signup-container">
@@ -809,13 +986,7 @@
                         </svg>
                     </summary>
                     <div class="faq-answer">
-                        <p>We're launching in phases:</p>
-                        <ul>
-                            <li>Early access members receive invitations in order of signup</li>
-                            <li>Initial launch in Los Angeles, Spring 2025</li>
-                            <li>You'll receive an email invitation when it's your turn</li>
-                            <li>Waitlist members receive priority access</li>
-                        </ul>
+                        <p>We're launching in Los Angeles in Spring 2025. Early access members receive invitations in order of signup, with waitlist members getting priority access.</p>
                     </div>
                 </details>
 
@@ -828,13 +999,7 @@
                         </svg>
                     </summary>
                     <div class="faq-answer">
-                        <p>No long-term commitments required:</p>
-                        <ul>
-                            <li>Pause, skip, or cancel anytime</li>
-                            <li>Weekly flexibility to adjust meal quantities</li>
-                            <li>No cancellation fees</li>
-                            <li>Change delivery frequency as needed</li>
-                        </ul>
+                        <p>No long-term commitments required. You can pause, skip, or cancel anytime with no cancellation fees.</p>
                     </div>
                 </details>
 
@@ -847,11 +1012,7 @@
                         </svg>
                     </summary>
                     <div class="faq-answer">
-                        <ul>
-                            <li>Meals are delivered fresh and ready-to-eat</li>
-                            <li>You'll get live tracking updates on your order</li>
-                            <li>Choose your preferred delivery date at checkout</li>
-                        </ul>
+                        <p>Meals are delivered fresh and ready-to-eat with live tracking updates. You can choose your preferred delivery date at checkout.</p>
                     </div>
                 </details>
 
@@ -877,29 +1038,36 @@
         </section>
     </main>
 
-    <footer>
+    <footer itemscope itemtype="https://schema.org/Organization">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Contact Us</h3>
-                <p>Email: wes@eatprepared.com</p>
-                <p>Phone: (714) 296-9327</p>
+                <p><span itemprop="email">Email: wes@eatprepared.com</span></p>
+                <p><span itemprop="telephone">Phone: (714) 296-9327</span></p>
+                <p><span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">Los Angeles</span>,
+                    <span itemprop="addressRegion">CA</span>
+                </span></p>
             </div>
             <div class="footer-section">
                 <h3>Follow Us</h3>
                 <div class="social-links">
-                    <a href="#" aria-label="Facebook">Facebook</a>
-                    <a href="#" aria-label="Twitter">Twitter</a>
-                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="https://www.facebook.com/eatprepared" rel="noopener" aria-label="Follow us on Facebook" itemprop="sameAs">Facebook</a>
+                    <a href="https://twitter.com/eatprepared" rel="noopener" aria-label="Follow us on Twitter" itemprop="sameAs">Twitter</a>
+                    <a href="https://www.instagram.com/eatprepared" rel="noopener" aria-label="Follow us on Instagram" itemprop="sameAs">Instagram</a>
                 </div>
             </div>
             <div class="footer-section">
                 <h3>Legal</h3>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <a href="/privacy" aria-label="Read our Privacy Policy">Privacy Policy</a>
+                <a href="/terms" aria-label="Read our Terms of Service">Terms of Service</a>
+                <link itemprop="url" href="https://eatprepared.com/">
+                <meta itemprop="name" content="Prepared">
+                <meta itemprop="logo" content="https://i.imgur.com/AcWQBZ7.png">
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Prepared. All rights reserved.</p>
+            <p>&copy; <span id="current-year">2024</span> Prepared. All rights reserved.</p>
         </div>
     </footer>
 
@@ -907,6 +1075,9 @@
     <script>
         // Initialize only critical functionality immediately
         document.body.classList.add('js-loading');
+        
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
         
         // Performance monitoring
         if (window.performance && window.performance.timing) {
