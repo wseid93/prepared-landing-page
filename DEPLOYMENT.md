@@ -56,17 +56,24 @@ This project includes GitHub Actions integration for automatic deployment when y
 
 1. Add the following secrets to your GitHub repository:
    - `NETLIFY_AUTH_TOKEN`: Your Netlify authentication token
-   - `NETLIFY_SITE_ID`: Your Netlify site ID
+   - `NETLIFY_SITE_ID`: Your Netlify site ID (should be `3387edf4-9fb6-475d-8c92-facad0f57db5`)
 
 2. Push your code to the `main` branch
 
-3. GitHub Actions will automatically run the deployment script
+3. GitHub Actions will automatically deploy your site directly to Netlify
+
+### Modified Deployment Process
+
+The GitHub Actions workflow has been updated to:
+1. Use Netlify CLI directly to deploy to your site
+2. Specify the site ID explicitly to ensure the correct site is targeted
+3. Deploy to production automatically
 
 ### Get Your Netlify Tokens
 
 To get your Netlify tokens:
 
-1. Get your site ID:
+1. Get your site ID (already set in netlify.yml):
    ```bash
    netlify sites:list
    ```

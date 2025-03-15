@@ -870,6 +870,10 @@
             margin-left: 0; /* Remove negative margin for cleaner layout */
         }
 
+            transform: scale(1.02) translateY(-5px);
+            z-index: 10; /* Ensure the image stays on top when scaled */
+        }
+
         /* Animation styles for steps */
         .step {
             opacity: 0;
@@ -913,6 +917,9 @@
                 margin-left: 0;
                 margin-bottom: -20px; /* Overlap slightly with steps */
             }
+
+            .iphone-mockup {
+            }
         }
 
         @media (max-width: 768px) {
@@ -939,25 +946,16 @@
             }
         }
 
+        .iphone-mockup.animate {
+        }
         /* iPhone image styles */
         .how-it-works-image img {
             display: block;
-            max-width: 270px; /* Increased by 50% from 180px */
+            max-width: 300px;
             width: 100%;
             height: auto;
             margin: 0 auto;
             vertical-align: middle;
-            transition: transform 0.3s ease;
-        }
-        
-        .how-it-works-image img:hover {
-            transform: scale(1.02);
-        }
-
-        @media (max-width: 991px) {
-            .how-it-works-image img {
-                max-width: 233px; /* Increased by 50% from 155px */
-            }
         }
     </style>
 </head>
@@ -1841,13 +1839,11 @@
                                 step.classList.add('animate');
                             });
                             
-                            // Stop observing once triggered
+                            // Animate iPhone mockup
+                            const iphone = document.querySelector('.iphone-mockup');
+                            if (iphone) {
+                                iphone.classList.add('animate');
                             stepsObserver.disconnect();
-                        }
-                    });
-                }, {
-                    threshold: 0.1
-                });
                 
                 const howItWorksSection = document.querySelector('.how-it-works');
                 if (howItWorksSection) {
@@ -1864,7 +1860,6 @@
             // Track image load performance
             const imgElements = document.querySelectorAll('img');
             let oversizedCount = 0;
-            let oversizedImages = [];
             
             imgElements.forEach(img => {
                 if (img.complete) {
@@ -1886,17 +1881,8 @@
                 // Check if image is significantly larger than its container (>1.5x)
                 if (img.naturalWidth > containerWidth * 1.5 || img.naturalHeight > containerHeight * 1.5) {
                     oversizedCount++;
-                    const imageInfo = {
-                        src: img.src,
-                        naturalWidth: img.naturalWidth,
-                        naturalHeight: img.naturalHeight,
-                        containerWidth: containerWidth,
-                        containerHeight: containerHeight,
-                        ratio: Math.max(img.naturalWidth / containerWidth, img.naturalHeight / containerHeight).toFixed(2)
-                    };
-                    oversizedImages.push(imageInfo);
                     console.warn(`Oversized image detected: ${img.src}`);
-                    console.info(`Image: ${img.naturalWidth}x${img.naturalHeight}, Container: ${containerWidth}x${containerHeight}, Ratio: ${imageInfo.ratio}x`);
+                    console.info(`Image: ${img.naturalWidth}x${img.naturalHeight}, Container: ${containerWidth}x${containerHeight}`);
                 }
             }
             
@@ -1904,38 +1890,10 @@
             setTimeout(() => {
                 if (oversizedCount > 0) {
                     console.warn(`Found ${oversizedCount} oversized images that could be optimized`);
-                    console.table(oversizedImages);
-                    console.info('To optimize these images: 1) Resize them to match their container size, 2) Compress them, 3) Consider using WebP format');
                 } else {
-                    console.info('✓ All images are appropriately sized for their containers - Good for SEO!');
+                    console.info('All images are appropriately sized for their containers');
                 }
-                
-                // Check if using proper image attributes for SEO
-                checkImageAttributes();
             }, 2000);
-            
-            function checkImageAttributes() {
-                let missingAlt = 0;
-                let missingDimensions = 0;
-                
-                imgElements.forEach(img => {
-                    if (!img.alt || img.alt === '') {
-                        missingAlt++;
-                        console.warn(`Missing alt text: ${img.src}`);
-                    }
-                    
-                    if (!img.width || !img.height) {
-                        missingDimensions++;
-                        console.warn(`Missing width/height attributes: ${img.src}`);
-                    }
-                });
-                
-                if (missingAlt > 0 || missingDimensions > 0) {
-                    console.warn(`SEO improvements needed: ${missingAlt} images missing alt text, ${missingDimensions} missing dimensions`);
-                } else {
-                    console.info('✓ All images have proper alt text and dimensions - Good for SEO!');
-                }
-            }
         });
     </script>
 </body>

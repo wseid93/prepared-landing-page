@@ -1,0 +1,14 @@
+site_id: 3387edf4-9fb6-475d-8c92-facad0f57db5
+site_name: eatprepared
+
+build:
+  publish: "."
+  command: "echo 'No build command needed - static site'"
+
+# These environment variables help with CI/CD deployment
+# They will be used if environment variables aren't set
+deploy:
+  prod:
+    environment:
+      - NETLIFY_SITE_ID=3387edf4-9fb6-475d-8c92-facad0f57db5
+      - NETLIFY_SITE_NAME=eatprepared 

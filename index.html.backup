@@ -121,17 +121,7 @@
                 display: none;
             }
             .hero-image-container {
-                background-image: url('https://i.imgur.com/lhhxgxB.avif');
-                background-image: -webkit-image-set(
-                    url('https://i.imgur.com/lhhxgxB.avif') type("image/avif"),
-                    url('https://i.imgur.com/lhhxgxB.webp') type("image/webp"),
-                    url('https://i.imgur.com/lhhxgxB.jpg') 1x
-                );
-                background-image: image-set(
-                    url('https://i.imgur.com/lhhxgxB.avif') type("image/avif"),
-                    url('https://i.imgur.com/lhhxgxB.webp') type("image/webp"),
-                    url('https://i.imgur.com/lhhxgxB.jpg') 1x
-                );
+                background-image: url('https://i.imgur.com/lhhxgxB.jpg');
                 background-size: cover;
                 background-position: center;
                 position: absolute;
@@ -317,9 +307,7 @@
     </style>
 
     <!-- Preload key resources -->
-    <link rel="preload" href="https://i.imgur.com/lhhxgxB.avif" as="image" fetchpriority="high" imagesizes="100vw">
-    <link rel="preload" href="https://i.imgur.com/lhhxgxB.webp" as="image" fetchpriority="high" imagesizes="100vw" media="(max-width: 768px)">
-    <link rel="preload" href="https://i.imgur.com/lhhxgxB.jpg" as="image" fetchpriority="high" imagesizes="100vw" media="not all and (min-resolution: 1.1dppx)">
+    <link rel="preload" href="https://i.imgur.com/lhhxgxB.webp" as="image" fetchpriority="high" imagesizes="100vw" imagesrcset="https://i.imgur.com/lhhxgxB.webp 800w, https://i.imgur.com/lhhxgxB.webp?width=1200 1200w, https://i.imgur.com/lhhxgxB.webp?width=1920 1920w" type="image/webp">
     
     <!-- Load non-critical CSS with lower priority -->
     <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'; this.onload=null;">
@@ -334,6 +322,106 @@
     
     <!-- Typeform Widget with defer to prevent blocking -->
     <script src="//embed.typeform.com/next/embed.js" defer></script>
+
+    <!-- Image optimization styles -->
+    <style>
+        /* Prevent layout shifts by properly sizing image containers */
+        .partner-image {
+            aspect-ratio: 1/1;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #f4f4f4;
+        }
+        
+        .partner-image img,
+        .partner-image picture {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .share-image-container {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            position: relative;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+        
+        .share-image-container img,
+        .share-image-container picture {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Hero image/video optimization */
+        .hero-image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .hero-poster {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        
+        /* Hide video on mobile devices where autoplay is less reliable */
+        @media (max-width: 768px) {
+            .hero-video {
+                display: none !important;
+            }
+            .hero-poster {
+                display: block !important;
+            }
+        }
+    </style>
 
     <!-- Google Analytics 4 with Enhanced Measurement - Optimized loading -->
     <script>
@@ -358,6 +446,70 @@
             'dimension3': 'page_load_time'
           }
         });
+        
+        // Fix video and picture overlay issue
+        const heroVideo = document.querySelector('.hero-video');
+        const heroPoster = document.querySelector('.hero-poster');
+        const heroContent = document.querySelector('.hero-content');
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        
+        if (heroVideo && heroPoster) {
+            // Check if the browser can autoplay video
+            const canAutoplay = (navigator.userAgent.indexOf('iPhone') === -1 && 
+                                 navigator.userAgent.indexOf('iPad') === -1) || 
+                                 (navigator.userAgent.indexOf('Safari') !== -1 && 
+                                 navigator.userAgent.indexOf('Chrome') === -1);
+            
+            // For mobile or browsers that don't support autoplay, just show the image
+            if (isMobile || !canAutoplay) {
+                heroVideo.style.display = 'none';
+                heroPoster.style.display = 'block';
+                return;
+            }
+            
+            // When video can play through
+            heroVideo.addEventListener('canplaythrough', function() {
+                heroVideo.style.display = 'block';
+                heroPoster.style.display = 'none';
+                // Add a class to signal that video is active
+                document.querySelector('.hero').classList.add('video-active');
+            });
+            
+            // When video metadata is loaded
+            heroVideo.addEventListener('loadedmetadata', function() {
+                heroVideo.style.display = 'block';
+                heroPoster.style.display = 'none';
+            });
+            
+            // When video starts playing
+            heroVideo.addEventListener('playing', function() {
+                heroPoster.style.display = 'none';
+                // Add a class to signal that video is active
+                document.querySelector('.hero').classList.add('video-active');
+            });
+            
+            // If video fails, show the picture
+            heroVideo.addEventListener('error', function() {
+                heroVideo.style.display = 'none';
+                heroPoster.style.display = 'block';
+                document.querySelector('.hero').classList.remove('video-active');
+            });
+            
+            // Check if video is already playing
+            if (heroVideo.readyState >= 3) {
+                heroVideo.style.display = 'block';
+                heroPoster.style.display = 'none';
+                document.querySelector('.hero').classList.add('video-active');
+            }
+            
+            // If no video activity after 2 seconds, fall back to image
+            setTimeout(function() {
+                if (!document.querySelector('.hero').classList.contains('video-active')) {
+                    heroVideo.style.display = 'none';
+                    heroPoster.style.display = 'block';
+                }
+            }, 2000);
+        }
       });
       
       // Track Core Web Vitals
@@ -480,7 +632,7 @@
         "name": "Can I customize my meal plan?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, you have full control over chefs, meal types, macros, and dietary preferences every week."
+          "text": "Absolutely! You have full control over your meal plan: Choose your preferred chef and change on a weekly basis, let the AI know how many meals you want, your budget, and macro targets, and specify ingredients you dislike or are allergic to."
         }
       }, {
         "@type": "Question",
@@ -586,6 +738,258 @@
             <path fill="#2DDA6B" d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/>
         </symbol>
     </svg>
+
+    <style>
+        /* Image optimization styles */
+        /* ... existing styles ... */
+
+        /* How It Works section styling */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .how-it-works {
+            padding: 3rem 0;
+            background-color: #fff;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Equal columns */
+            align-items: center;
+            gap: 2rem; /* Increased gap for better spacing */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .how-it-works-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding-left: 2rem; /* Adds padding to move text towards center */
+        }
+
+        .step {
+            display: flex;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            align-items: flex-start;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+            background-color: #22C55E;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-top: 2px; /* Fine-tuned alignment */
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step h3 {
+            margin-top: 7px; /* Fine-tuned alignment with number */
+            margin-bottom: 1rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem; /* Increased spacing between bullet points (from 0.5rem to 0.75rem) */
+            padding-left: 10px; /* Added indentation for better visual hierarchy */
+        }
+
+        .step-list li {
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-start;
+            margin-bottom: 0.25rem; /* Added bottom margin for breathing room */
+        }
+
+        .check-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
+            height: 22px;
+            background-color: rgba(34, 197, 94, 0.15);
+            color: #22C55E;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+
+        .step-list li div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-list li strong {
+            font-weight: 600;
+        }
+
+        .step-list li span {
+            color: #4B5563;
+        }
+
+        .how-it-works-image {
+            display: flex;
+            justify-content: center; /* Centers image horizontally */
+            align-items: center;
+            padding: 0;
+            background-color: transparent;
+            overflow: visible;
+            margin-left: 0; /* Remove negative margin for cleaner layout */
+        }
+
+        /* Simplified iPhone mockup styles */
+        .iphone-mockup {
+            display: block;
+            max-width: 300px; /* Increased from 262.5px (now ~15% smaller than original 350px) */
+            width: 100%;
+            height: auto;
+            margin: 0;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.5s ease;
+            transition-delay: 0.4s;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            vertical-align: middle;
+        }
+
+        /* Animation states */
+        .iphone-mockup.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .iphone-mockup.animate:hover {
+            transform: scale(1.02) translateY(-5px);
+            z-index: 10; /* Ensure the image stays on top when scaled */
+        }
+
+        /* Animation styles for steps */
+        .step {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition-delay: calc(var(--step-index, 0) * 0.1s + 0.1s);
+        }
+        
+        .step.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .step:nth-child(1) {
+            --step-index: 0;
+        }
+        
+        .step:nth-child(2) {
+            --step-index: 1;
+        }
+        
+        .step:nth-child(3) {
+            --step-index: 2;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 991px) {
+            .how-it-works-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .how-it-works-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .how-it-works-image {
+                order: -1;
+                justify-content: center;
+                margin-left: 0;
+                margin-bottom: -20px; /* Overlap slightly with steps */
+            }
+
+            .iphone-mockup {
+                max-width: 260px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .how-it-works {
+                padding: 2rem 0;
+            }
+
+            .how-it-works h2 {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .step {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .step-number {
+                margin-top: 2px; /* Maintain alignment on mobile */
+            }
+            
+            .step h3 {
+                margin-top: 7px; /* Maintain alignment on mobile */
+            }
+        }
+
+        .iphone-mockup.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .iphone-mockup.animate:hover {
+            transform: scale(1.02) translateY(-5px);
+        }
+
+        /* iPhone image styles */
+        .how-it-works-image img {
+            display: block;
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
     <!-- Start of body - above-the-fold content begins -->
@@ -607,6 +1011,11 @@
     <header class="hero section-transition dark-to-light">
         <div class="hero-image-container">
             <div class="hero-overlay"></div>
+            <picture class="hero-poster" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+                <source srcset="https://i.imgur.com/lhhxgxB.webp 800w, https://i.imgur.com/lhhxgxB.webp?width=1200 1200w, https://i.imgur.com/lhhxgxB.webp?width=1920 1920w" type="image/webp" sizes="100vw">
+                <source srcset="https://i.imgur.com/lhhxgxB.jpg 800w, https://i.imgur.com/lhhxgxB.jpg?width=1200 1200w, https://i.imgur.com/lhhxgxB.jpg?width=1920 1920w" type="image/jpeg" sizes="100vw">
+                <img src="https://i.imgur.com/lhhxgxB.jpg" alt="Chef preparing personalized meals in a professional kitchen" loading="eager" fetchpriority="high" style="width: 100%; height: 100%; object-fit: cover;">
+            </picture>
             <video 
                 class="hero-video" 
                 autoplay 
@@ -615,14 +1024,14 @@
                 playsinline
                 loading="lazy"
                 fetchpriority="low"
-                poster="https://i.imgur.com/lhhxgxB.webp"
+                poster="https://i.imgur.com/lhhxgxB.jpg"
                 width="1920"
                 height="1080"
-                style="display: none;"
+                style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
                 aria-label="Chef preparing personalized meals in a professional kitchen"
-                onloadedmetadata="this.style.display='block'">
+                onloadedmetadata="this.style.display='block'; document.querySelector('.hero-poster').style.display='none';">
                 <source src="https://i.imgur.com/lhhxgxB.mp4" type="video/mp4">
-                <p>Your browser doesn't support HTML5 video. Here's a <a href="https://i.imgur.com/lhhxgxB.webp">link to the poster image</a> instead.</p>
+                <p>Your browser doesn't support HTML5 video. Here's a <a href="https://i.imgur.com/lhhxgxB.jpg">link to the poster image</a> instead.</p>
             </video>
         </div>
         <div class="hero-content">
@@ -638,8 +1047,8 @@
                     <span class="stat-label" itemprop="description">Meal Planning</span>
                 </div>
                 <div class="stat-item" itemscope itemtype="https://schema.org/Offer">
-                    <span class="stat-number" itemprop="name">10,000+</span>
-                    <span class="stat-label" itemprop="description">Personalized Meals</span>
+                    <span class="stat-number" itemprop="name">1,000+</span>
+                    <span class="stat-label" itemprop="description">Meals</span>
                 </div>
             </div>
             <div data-tf-live="01JKCR97WBT8JFCGH2EX1Z2M0J"></div>
@@ -647,79 +1056,85 @@
     </header>
 
     <main>
-        <section class="share-section section-transition light-to-dark">
-            <h2>Your Meal Planning Journey in 3 Steps</h2>
-            <div class="share-grid">
-                <div class="share-card">
-                    <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                        <img src="https://i.imgur.com/dD2wjpo.png" alt="Browse and select a local chef for personalized meals" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;" srcset="https://i.imgur.com/dD2wjpo.png 400w, https://i.imgur.com/dD2wjpo.png?width=800 800w" sizes="(max-width: 768px) 100vw, 33vw">
-                    </div>
-                    <div class="share-card-content">
-                        <h3>Find a Chef for This Week</h3>
-                        <ul class="share-checklist">
-                            <li>
-                                <div class="checklist-content">
-                                    <div class="checklist-header">✓ <strong>Personalized Matches</strong></div>
-                                    <div class="checklist-details">AI suggests chefs based on your goals</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="checklist-content">
-                                    <div class="checklist-header">✓ <strong>Total Flexibility</strong></div>
-                                    <div class="checklist-details">Pick a new chef every week</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <section class="how-it-works section-transition light-to-dark">
+            <div class="container">
+                <h2>Your Meal Planning in 3 Steps</h2>
+                <div class="how-it-works-grid">
+                    <!-- Left Column: Steps -->
+                    <div class="how-it-works-content">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Find Your Chef</h3>
+                                <ul class="step-list">
+                                    <li>
+                                        <span class="check-icon">✓</span>
+                                        <div>
+                                            <strong>Personalized Matches</strong>
+                                            <span>Chefs aligned with your goals</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="check-icon">✓</span>
+                                        <div>
+                                            <strong>Weekly Variety</strong>
+                                            <span>New local chefs every week</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                <div class="share-card">
-                    <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                        <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                            <img src="https://i.imgur.com/5qtjtPC.png" alt="Select a personalized meal plan tailored to your fitness goals" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;" srcset="https://i.imgur.com/5qtjtPC.png 400w, https://i.imgur.com/5qtjtPC.png?width=800 800w" sizes="(max-width: 768px) 100vw, 33vw">
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Customize Meals</h3>
+                                <ul class="step-list">
+                                    <li>
+                                        <span class="check-icon">✓</span>
+                                        <div>
+                                            <strong>Tailored for You</strong>
+                                            <span>Meals crafted to fit your lifestyle</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="check-icon">✓</span>
+                                        <div>
+                                            <strong>Flexible & Easy</strong>
+                                            <span>Adjust choices anytime</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Enjoy Delivery</h3>
+                                <ul class="step-list">
+                                    <li>
+                                        <span class="check-icon">✓</span>
+                                        <div>
+                                            <strong>Simple & Reliable</strong>
+                                            <span>Meals delivered straight to you</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="check-icon">✓</span>
+                                        <div>
+                                            <strong>Stress-Free</strong>
+                                            <span>No cooking or cleanup</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="share-card-content">
-                        <h3>Pick a Meal Plan That Fits You</h3>
-                        <ul class="share-checklist">
-                            <li>
-                                <div class="checklist-content">
-                                    <div class="checklist-header">✓ <strong>Tailored to Your Goals</strong></div>
-                                    <div class="checklist-details">Meals match your macros & diet</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="checklist-content">
-                                    <div class="checklist-header">✓ <strong>Easy Swaps</strong></div>
-                                    <div class="checklist-details">Change meals or switch chefs anytime</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="share-card">
-                    <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                        <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
-                            <img src="https://i.imgur.com/myhrFjr.png" alt="Complete checkout and track your meal delivery in real time" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;" srcset="https://i.imgur.com/myhrFjr.png 400w, https://i.imgur.com/myhrFjr.png?width=800 800w" sizes="(max-width: 768px) 100vw, 33vw">
-                        </div>
-                    </div>
-                    <div class="share-card-content">
-                        <h3>Checkout & Track Your Order</h3>
-                        <ul class="share-checklist">
-                            <li>
-                                <div class="checklist-content">
-                                    <div class="checklist-header">✓ <strong>Fast Checkout</strong></div>
-                                    <div class="checklist-details">Pay instantly with Apple Pay or card</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="checklist-content">
-                                    <div class="checklist-header">✓ <strong>Live Tracking</strong></div>
-                                    <div class="checklist-details">See when your meals will arrive</div>
-                                </div>
-                            </li>
-                        </ul>
+                    <!-- Right Column: iPhone Image -->
+                    <div class="how-it-works-image">
+                        <img src="https://i.imgur.com/dD2wjpo.png" alt="Prepared meal planning app showing chef selection, meal planning, and order tracking" loading="lazy" width="375" height="812" fetchpriority="low">
                     </div>
                 </div>
             </div>
@@ -737,9 +1152,8 @@
                             <div class="partner-header">
                                 <div class="partner-image">
                                     <picture>
-                                        <source srcset="https://i.imgur.com/q46wE7H.avif" type="image/avif">
                                         <source srcset="https://i.imgur.com/q46wE7H.webp" type="image/webp">
-                                        <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
+                                        <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px; object-fit: cover; display: block;" itemprop="image">
                                     </picture>
                                 </div>
                                 <div class="partner-info">
@@ -754,9 +1168,8 @@
                             <div class="partner-header">
                                 <div class="partner-image">
                                     <picture>
-                                        <source srcset="https://i.imgur.com/zwtXFoR.avif" type="image/avif">
                                         <source srcset="https://i.imgur.com/zwtXFoR.webp" type="image/webp">
-                                        <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander - Certified nutritionist and chef from Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
+                                        <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander - Certified nutritionist and chef from Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px; object-fit: cover; display: block;" itemprop="image">
                                     </picture>
                                 </div>
                                 <div class="partner-info">
@@ -771,9 +1184,8 @@
                             <div class="partner-header">
                                 <div class="partner-image">
                                     <picture>
-                                        <source srcset="https://i.imgur.com/Uno4TR4.avif" type="image/avif">
                                         <source srcset="https://i.imgur.com/Uno4TR4.webp" type="image/webp">
-                                        <img src="https://i.imgur.com/Uno4TR4.png" alt="Chef Moises - Sustainable local farm provider from Gardena" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                        <img src="https://i.imgur.com/Uno4TR4.png" alt="Chef Moises - Sustainable local farm provider from Gardena" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px; object-fit: cover; display: block;" itemprop="image">
                                     </picture>
                                 </div>
                                 <div class="partner-info">
@@ -788,9 +1200,8 @@
                             <div class="partner-header">
                                 <div class="partner-image">
                                     <picture>
-                                        <source srcset="https://i.imgur.com/52OMvzu.avif" type="image/avif">
                                         <source srcset="https://i.imgur.com/52OMvzu.webp" type="image/webp">
-                                        <img src="https://i.imgur.com/52OMvzu.png" alt="Lean Mean Meal Prep - Premium meal preparation service in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                        <img src="https://i.imgur.com/52OMvzu.png" alt="Lean Mean Meal Prep - Premium meal preparation service in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px; object-fit: cover; display: block;" itemprop="image">
                                     </picture>
                                 </div>
                                 <div class="partner-info">
@@ -805,9 +1216,8 @@
                             <div class="partner-header">
                                 <div class="partner-image">
                                     <picture>
-                                        <source srcset="https://i.imgur.com/OwiW1oY.avif" type="image/avif">
                                         <source srcset="https://i.imgur.com/OwiW1oY.webp" type="image/webp">
-                                        <img src="https://i.imgur.com/OwiW1oY.png" alt="Fresh Off The Boat - Seafood and nutrition partner in Costa Mesa" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                        <img src="https://i.imgur.com/OwiW1oY.png" alt="Fresh Off The Boat - Seafood and nutrition partner in Costa Mesa" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px; object-fit: cover; display: block;" itemprop="image">
                                     </picture>
                                 </div>
                                 <div class="partner-info">
@@ -822,9 +1232,8 @@
                             <div class="partner-header">
                                 <div class="partner-image">
                                     <picture>
-                                        <source srcset="https://i.imgur.com/07wOkmX.avif" type="image/avif">
                                         <source srcset="https://i.imgur.com/07wOkmX.webp" type="image/webp">
-                                        <img src="https://i.imgur.com/07wOkmX.png" alt="80/20 Fitness - Fitness and nutrition partner in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                        <img src="https://i.imgur.com/07wOkmX.png" alt="80/20 Fitness - Fitness and nutrition partner in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px; object-fit: cover; display: block;" itemprop="image">
                                     </picture>
                                 </div>
                                 <div class="partner-info">
@@ -839,9 +1248,8 @@
                             <div class="partner-header">
                                 <div class="partner-image">
                                     <picture>
-                                        <source srcset="https://i.imgur.com/dk8y4Hp.avif" type="image/avif">
                                         <source srcset="https://i.imgur.com/dk8y4Hp.webp" type="image/webp">
-                                        <img src="https://i.imgur.com/dk8y4Hp.png" alt="OC FIT - Fitness and nutrition partner in Anaheim" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                        <img src="https://i.imgur.com/dk8y4Hp.png" alt="OC FIT - Fitness and nutrition partner in Anaheim" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px; object-fit: cover; display: block;" itemprop="image">
                                     </picture>
                                 </div>
                                 <div class="partner-info">
@@ -856,7 +1264,7 @@
                         <div class="partner-card chef-card" itemscope itemtype="https://schema.org/Person">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <picture><source srcset="https://i.imgur.com/q46wE7H.avif" type="image/avif"><source srcset="https://i.imgur.com/q46wE7H.webp" type="image/webp"><img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
+                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">Chef Jonathan</h3>
@@ -1112,7 +1520,7 @@
         <section class="signup section-transition light-to-dark">
             <div class="signup-container">
                 <h2>Join the Future of Personalized Nutrition</h2>
-                <p class="signup-description">Be the first to experience AI-powered meal delivery. Get 20% off during our Early Access Program.</p>
+                <p class="signup-description">Be the first to experience AI-powered meal delivery.<br>Get 20% off during our Early Access Program.</p>
                 <div data-tf-live="01JKCR97WBT8JFCGH2EX1Z2M0J"></div>
             </div>
         </section>
@@ -1452,138 +1860,81 @@
                     element.classList.add('animate-visible');
                 });
             }
-        });
-        
-        // Load advanced animations and effects after everything else
-        window.addEventListener('load', () => {
-            // Wait to ensure all critical content is loaded
-            setTimeout(() => {
-                // Mobile CTA visibility optimized with passive event listener
-                const mobileCTA = document.querySelector('.mobile-cta');
-                const isMobile = window.matchMedia('(max-width: 768px)').matches;
-                let lastScrollTop = 0;
-                let ctaTicking = false;
-                
-                if (mobileCTA && isMobile) {
-                    // Use passive event listener for better scroll performance
-                    window.addEventListener('scroll', () => {
-                        if (!ctaTicking) {
-                            requestAnimationFrame(() => {
-                                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                                const isScrollingDown = scrollTop > lastScrollTop;
-                                const isTopOfPage = scrollTop < 100;
-
-                                if (isScrollingDown && !isTopOfPage) {
-                                    mobileCTA.classList.add('mobile-cta-visible');
-                                } else {
-                                    mobileCTA.classList.remove('mobile-cta-visible');
-                                }
-
-                                lastScrollTop = scrollTop;
-                                ctaTicking = false;
-                            });
-                            ctaTicking = true;
-                        }
-                    }, { passive: true }); // Add passive flag for better performance
-                }
-
-                // Parallax scroll effect for hero section (optimized with requestAnimationFrame) - desktop only
-                if (!isMobile) {
-                    let lastScrollY = window.scrollY;
-                    const hero = document.querySelector('.hero');
-                    let ticking = false;
-                    
-                    if (hero) {
-                        window.addEventListener('scroll', () => {
-                            if (!ticking) {
-                                requestAnimationFrame(() => {
-                                    const scrollY = window.scrollY;
-                                    if (scrollY > 0 && scrollY < window.innerHeight) {
-                                        const offset = scrollY * 0.5;
-                                        hero.style.setProperty('--scroll-offset', `${offset}px`);
-                                        hero.classList.add('scrolling');
-                                    } else {
-                                        hero.classList.remove('scrolling');
-                                    }
-                                    lastScrollY = scrollY;
-                                    ticking = false;
-                                });
-                                ticking = true;
-                            }
-                        }, { passive: true });
-                    }
-                }
-                
-                // Smooth scroll for navigation links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            const headerOffset = 80;
-                            const elementPosition = target.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition - headerOffset;
-
-                            window.scrollBy({
-                                top: offsetPosition,
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
-                });
-            }, 100); // Small delay to ensure critical content is handled first
-        }, { once: true }); // Only run once
-    </script>
-    
-    <!-- Lazy loading polyfill -->
-    <script defer>
-        window.addEventListener('load', function() {
-            // Only run if needed
-            if ('IntersectionObserver' in window && !('loading' in HTMLImageElement.prototype)) {
-                // Create an observer for images
-                const imgObserver = new IntersectionObserver((entries, observer) => {
+            
+            // Animate steps when they come into view
+            const animateSteps = () => {
+                const stepsObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            const img = entry.target;
-                            const dataSrc = img.getAttribute('data-src');
-                            if (dataSrc) {
-                                img.src = dataSrc;
-                                img.removeAttribute('data-src');
+                            const steps = document.querySelectorAll('.step');
+                            steps.forEach(step => {
+                                step.classList.add('animate');
+                            });
+                            
+                            // Animate iPhone mockup
+                            const iphone = document.querySelector('.iphone-mockup');
+                            if (iphone) {
+                                iphone.classList.add('animate');
                             }
-                            observer.unobserve(img);
+                            
+                            // Stop observing once triggered
+                            stepsObserver.disconnect();
                         }
                     });
+                }, {
+                    threshold: 0.1
                 });
-
-                // Apply to all images with loading="lazy"
-                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-                    // Backup the original src
-                    if (!img.hasAttribute('data-src')) {
-                        img.setAttribute('data-src', img.src);
-                        // Use a small placeholder or data URI
-                        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
-                        // Observe the image
-                        imgObserver.observe(img);
-                    }
-                });
-            }
-        }, { once: true }); // Only run once
-    </script>
-    
-    <!-- <script src="cloudinary_config.js" defer></script> -->
-    
-    <!-- Typeform initialization -->
-    <script defer>
-        // Initialize Typeform after page load
+                
+                const howItWorksSection = document.querySelector('.how-it-works');
+                if (howItWorksSection) {
+                    stepsObserver.observe(howItWorksSection);
+                }
+            };
+            
+            // Run animations
+            animateSteps();
+        });
+        
+        // Image optimization functions
         window.addEventListener('load', () => {
-            // Make sure Typeform elements are initialized properly
-            if (window.tf && typeof window.tf.createWidget === 'function') {
-                const widgets = document.querySelectorAll('[data-tf-live]');
-                if (widgets.length > 0) {
-                    console.log('Typeform widgets detected:', widgets.length);
+            // Track image load performance
+            const imgElements = document.querySelectorAll('img');
+            let oversizedCount = 0;
+            
+            imgElements.forEach(img => {
+                if (img.complete) {
+                    checkImageDimensions(img);
+                } else {
+                    img.addEventListener('load', () => checkImageDimensions(img));
+                }
+            });
+            
+            function checkImageDimensions(img) {
+                // Check if container exists
+                const container = img.parentElement;
+                if (!container) return;
+                
+                // Get container dimensions
+                const containerWidth = container.clientWidth;
+                const containerHeight = container.clientHeight;
+                
+                // Check if image is significantly larger than its container (>1.5x)
+                if (img.naturalWidth > containerWidth * 1.5 || img.naturalHeight > containerHeight * 1.5) {
+                    oversizedCount++;
+                    console.warn(`Oversized image detected: ${img.src}`);
+                    console.info(`Image: ${img.naturalWidth}x${img.naturalHeight}, Container: ${containerWidth}x${containerHeight}`);
                 }
             }
-        }, { once: true });
+            
+            // Log summary of image optimization
+            setTimeout(() => {
+                if (oversizedCount > 0) {
+                    console.warn(`Found ${oversizedCount} oversized images that could be optimized`);
+                } else {
+                    console.info('All images are appropriately sized for their containers');
+                }
+            }, 2000);
+        });
     </script>
 </body>
 </html>

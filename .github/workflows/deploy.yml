@@ -22,14 +22,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y webp libavif-bin
           npm install -g netlify-cli
-          
-      - name: Run deployment script
+      
+      # Option 1: Use Netlify CLI directly with explicit site ID
+      - name: Deploy to Netlify
         run: |
-          chmod +x ./deploy.sh
-          ./deploy.sh --production
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          npx netlify deploy --site=${{ secrets.NETLIFY_SITE_ID }} --auth=${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --dir="."
+        
+      # Uncomment this section if you still need to run your deploy script for image processing
+      # - name: Process images (if needed)
+      #   run: |
+      #     chmod +x ./deploy.sh
+      #     ./deploy.sh --skip-deploy
           
       - name: Output deployment URL
         run: echo "Site deployed to Netlify!" 

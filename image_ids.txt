@@ -1,13 +1,12 @@
-07wOkmX
-52OMvzu
-5qtjtPC
-AcWQBZ7
-dD2wjpo
-dk8y4Hp
-lhhxgxB
-myhrFjr
-OwiW1oY
-q46wE7H
-tPwADZs
-Uno4TR4
-zwtXFoR
+dD2wjpo   # Browse and select a local chef
+5qtjtPC   # Select a personalized meal plan
+myhrFjr   # Complete checkout and track
+lhhxgxB   # Hero background image
+q46wE7H   # Chef Jonathan
+zwtXFoR   # Chef Alexander
+Uno4TR4   # Chef Moises
+52OMvzu   # Lean Mean Meal Prep
+OwiW1oY   # Fresh Off The Boat
+07wOkmX   # 80/20 Fitness
+dk8y4Hp   # OC FIT
+XrvqCcP   # Three step journey app image

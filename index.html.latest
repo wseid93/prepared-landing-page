@@ -870,6 +870,34 @@
             margin-left: 0; /* Remove negative margin for cleaner layout */
         }
 
+        /* Simplified iPhone mockup styles */
+        .iphone-mockup {
+            display: block;
+            max-width: 300px; /* Increased from 262.5px (now ~15% smaller than original 350px) */
+            width: 100%;
+            height: auto;
+            margin: 0;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.5s ease;
+            transition-delay: 0.4s;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            vertical-align: middle;
+        }
+
+        /* Animation states */
+        .iphone-mockup.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .iphone-mockup.animate:hover {
+            transform: scale(1.02) translateY(-5px);
+            z-index: 10; /* Ensure the image stays on top when scaled */
+        }
+
         /* Animation styles for steps */
         .step {
             opacity: 0;
@@ -913,6 +941,10 @@
                 margin-left: 0;
                 margin-bottom: -20px; /* Overlap slightly with steps */
             }
+
+            .iphone-mockup {
+                max-width: 260px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -939,25 +971,13 @@
             }
         }
 
-        /* iPhone image styles */
-        .how-it-works-image img {
-            display: block;
-            max-width: 270px; /* Increased by 50% from 180px */
-            width: 100%;
-            height: auto;
-            margin: 0 auto;
-            vertical-align: middle;
-            transition: transform 0.3s ease;
+        .iphone-mockup.animate {
+            opacity: 1;
+            transform: translateX(0);
         }
         
-        .how-it-works-image img:hover {
-            transform: scale(1.02);
-        }
-
-        @media (max-width: 991px) {
-            .how-it-works-image img {
-                max-width: 233px; /* Increased by 50% from 155px */
-            }
+        .iphone-mockup.animate:hover {
+            transform: scale(1.02) translateY(-5px);
         }
     </style>
 </head>
@@ -982,9 +1002,40 @@
         <div class="hero-image-container">
             <div class="hero-overlay"></div>
             <picture class="hero-poster" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
-                <source srcset="https://i.imgur.com/lhhxgxB.webp 800w, https://i.imgur.com/lhhxgxB.webp?width=1200 1200w, https://i.imgur.com/lhhxgxB.webp?width=1920 1920w" type="image/webp" sizes="100vw">
-                <source srcset="https://i.imgur.com/lhhxgxB.jpg 800w, https://i.imgur.com/lhhxgxB.jpg?width=1200 1200w, https://i.imgur.com/lhhxgxB.jpg?width=1920 1920w" type="image/jpeg" sizes="100vw">
-                <img src="https://i.imgur.com/lhhxgxB.jpg" alt="Chef preparing personalized meals in a professional kitchen" loading="eager" fetchpriority="high" style="width: 100%; height: 100%; object-fit: cover;">
+                <!-- AVIF format with responsive sizing -->
+                <source
+                  type="image/avif"
+                  srcset="
+                    avif/xl/lhhxgxB_1920x1080.avif 1920w,
+                    avif/lg/lhhxgxB_1280x720.avif 1280w,
+                    avif/md/lhhxgxB_768x432.avif 768w,
+                    avif/sm/lhhxgxB_480x270.avif 480w,
+                    avif/xs/lhhxgxB_320x180.avif 320w
+                  "
+                  sizes="100vw"
+                >
+                <!-- WebP format with responsive sizing -->
+                <source
+                  type="image/webp"
+                  srcset="
+                    webp/xl/lhhxgxB_1920x1080.webp 1920w,
+                    webp/lg/lhhxgxB_1280x720.webp 1280w,
+                    webp/md/lhhxgxB_768x432.webp 768w,
+                    webp/sm/lhhxgxB_480x270.webp 480w,
+                    webp/xs/lhhxgxB_320x180.webp 320w
+                  "
+                  sizes="100vw"
+                >
+                <!-- Fallback JPG -->
+                <img 
+                  src="https://i.imgur.com/lhhxgxB.jpg" 
+                  alt="Chef preparing personalized meals in a professional kitchen" 
+                  loading="eager" 
+                  fetchpriority="high"
+                  width="1920"
+                  height="1080"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                >
             </picture>
             <video 
                 class="hero-video" 
@@ -1104,7 +1155,53 @@
 
                     <!-- Right Column: iPhone Image -->
                     <div class="how-it-works-image">
-                        <img src="https://i.imgur.com/dD2wjpo.png" alt="Prepared meal planning app showing chef selection, meal planning, and order tracking" loading="lazy" width="375" height="812" fetchpriority="low">
+                        <picture>
+                            <!-- AVIF format -->
+                            <source
+                                type="image/avif"
+                                srcset="
+                                    avif/md/dD2wjpo_600x800.avif 600w,
+                                    avif/sm/dD2wjpo_375x500.avif 375w,
+                                    avif/xs/dD2wjpo_320x427.avif 320w
+                                "
+                                sizes="(max-width: 768px) 100vw, 375px"
+                            >
+                            <!-- WebP format -->
+                            <source
+                                type="image/webp"
+                                srcset="
+                                    webp/md/dD2wjpo_600x800.webp 600w,
+                                    webp/sm/dD2wjpo_375x500.webp 375w,
+                                    webp/xs/dD2wjpo_320x427.webp 320w
+                                "
+                                sizes="(max-width: 768px) 100vw, 375px"
+                            >
+                            <!-- Fallback PNG -->
+                            <img
+                                src="https://i.imgur.com/dD2wjpo.png" 
+                                alt="Prepared meal planning app showing chef selection, meal planning, and order tracking" 
+                                loading="lazy" 
+                                width="375" 
+                                height="812"
+                                fetchpriority="low"
+                                class="iphone-mockup"
+                                style="max-width: 100%; height: auto;"
+                            >
+                        </picture>
+                    </div>
+
+                    <!-- Right Column: iPhone Image - Simple version until optimized images are ready -->
+                    <div class="how-it-works-image">
+                        <img
+                            src="https://i.imgur.com/dD2wjpo.png" 
+                            alt="Prepared meal planning app showing chef selection, meal planning, and order tracking" 
+                            loading="lazy" 
+                            width="375" 
+                            height="812"
+                            fetchpriority="low"
+                            class="iphone-mockup"
+                            style="max-width: 300px; width: 100%; height: auto;"
+                        >
                     </div>
                 </div>
             </div>
@@ -1841,6 +1938,12 @@
                                 step.classList.add('animate');
                             });
                             
+                            // Animate iPhone mockup
+                            const iphone = document.querySelector('.iphone-mockup');
+                            if (iphone) {
+                                iphone.classList.add('animate');
+                            }
+                            
                             // Stop observing once triggered
                             stepsObserver.disconnect();
                         }
@@ -1864,7 +1967,6 @@
             // Track image load performance
             const imgElements = document.querySelectorAll('img');
             let oversizedCount = 0;
-            let oversizedImages = [];
             
             imgElements.forEach(img => {
                 if (img.complete) {
@@ -1886,17 +1988,8 @@
                 // Check if image is significantly larger than its container (>1.5x)
                 if (img.naturalWidth > containerWidth * 1.5 || img.naturalHeight > containerHeight * 1.5) {
                     oversizedCount++;
-                    const imageInfo = {
-                        src: img.src,
-                        naturalWidth: img.naturalWidth,
-                        naturalHeight: img.naturalHeight,
-                        containerWidth: containerWidth,
-                        containerHeight: containerHeight,
-                        ratio: Math.max(img.naturalWidth / containerWidth, img.naturalHeight / containerHeight).toFixed(2)
-                    };
-                    oversizedImages.push(imageInfo);
                     console.warn(`Oversized image detected: ${img.src}`);
-                    console.info(`Image: ${img.naturalWidth}x${img.naturalHeight}, Container: ${containerWidth}x${containerHeight}, Ratio: ${imageInfo.ratio}x`);
+                    console.info(`Image: ${img.naturalWidth}x${img.naturalHeight}, Container: ${containerWidth}x${containerHeight}`);
                 }
             }
             
@@ -1904,38 +1997,10 @@
             setTimeout(() => {
                 if (oversizedCount > 0) {
                     console.warn(`Found ${oversizedCount} oversized images that could be optimized`);
-                    console.table(oversizedImages);
-                    console.info('To optimize these images: 1) Resize them to match their container size, 2) Compress them, 3) Consider using WebP format');
                 } else {
-                    console.info('✓ All images are appropriately sized for their containers - Good for SEO!');
+                    console.info('All images are appropriately sized for their containers');
                 }
-                
-                // Check if using proper image attributes for SEO
-                checkImageAttributes();
             }, 2000);
-            
-            function checkImageAttributes() {
-                let missingAlt = 0;
-                let missingDimensions = 0;
-                
-                imgElements.forEach(img => {
-                    if (!img.alt || img.alt === '') {
-                        missingAlt++;
-                        console.warn(`Missing alt text: ${img.src}`);
-                    }
-                    
-                    if (!img.width || !img.height) {
-                        missingDimensions++;
-                        console.warn(`Missing width/height attributes: ${img.src}`);
-                    }
-                });
-                
-                if (missingAlt > 0 || missingDimensions > 0) {
-                    console.warn(`SEO improvements needed: ${missingAlt} images missing alt text, ${missingDimensions} missing dimensions`);
-                } else {
-                    console.info('✓ All images have proper alt text and dimensions - Good for SEO!');
-                }
-            }
         });
     </script>
 </body>
