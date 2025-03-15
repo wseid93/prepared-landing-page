@@ -2,11 +2,14 @@
 <html lang="en" class="smooth-scroll">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes">
     
     <!-- Resource hints for image loading -->
     <meta http-equiv="Accept-CH" content="DPR, Width, Viewport-Width">
     <meta name="prioritize" content="LCP">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="light">
+    <meta name="mobile-web-app-capable" content="yes">
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +19,9 @@
     <link rel="preconnect" href="https://i.imgur.com" crossorigin>
     
     <link rel="icon" type="image/png" href="https://i.imgur.com/AcWQBZ7.png">
+
+    <!-- Add PWA enhancement -->
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Critical CSS inlined -->
     <style>
@@ -71,13 +77,24 @@
                 background-image: url('https://i.imgur.com/lhhxgxB.jpg');
                 background-size: cover;
                 background-position: center;
-                contain: strict; /* Further optimize rendering */
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                contain: paint; /* Less restrictive containment for better layout */
             }
             .navbar {
                 display: flex;
                 justify-content: space-between;
                 padding: 10px 20px;
                 background-color: #000;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
             }
             .navbar .nav-logo {font-size: 1.2rem;}
             .navbar .nav-container {
@@ -90,11 +107,27 @@
             a {
                 min-height: 44px;
                 min-width: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
             }
             /* Prevent content reflow */
             img, video {
                 height: auto;
                 aspect-ratio: attr(width) / attr(height);
+                max-width: 100%;
+                display: block;
+            }
+            /* Add content-visibility for offscreen content */
+            .section-transition:not(.hero) {
+                content-visibility: auto;
+                contain-intrinsic-size: 1px 500px;
+            }
+            /* Add display: contents to parent containers of images to prevent CLS */
+            .partner-image, .share-card > img {
+                width: 100%;
+                height: auto;
+                display: block;
             }
         }
     </style>
@@ -232,7 +265,11 @@
                 playsinline
                 loading="lazy"
                 fetchpriority="low"
-                poster="https://i.imgur.com/lhhxgxB.jpg">
+                poster="https://i.imgur.com/lhhxgxB.jpg"
+                width="1920"
+                height="1080"
+                style="display: none;"
+                onloadedmetadata="this.style.display='block'">
                 <source src="https://i.imgur.com/lhhxgxB.mp4" type="video/mp4">
             </video>
         </div>
@@ -262,7 +299,9 @@
             <h2>Your Meal Planning Journey in 3 Steps</h2>
             <div class="share-grid">
                 <div class="share-card">
-                    <img src="https://i.imgur.com/dD2wjpo.png" alt="Social sharing example" loading="lazy" width="400" height="300" fetchpriority="low">
+                    <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
+                        <img src="https://i.imgur.com/dD2wjpo.png" alt="Social sharing example" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;">
+                    </div>
                     <div class="share-card-content">
                         <h3>Find a Chef for This Week</h3>
                         <ul class="share-checklist">
@@ -283,7 +322,9 @@
                 </div>
 
                 <div class="share-card">
-                    <img src="https://i.imgur.com/5qtjtPC.png" alt="Healthcare sharing example" loading="lazy" width="400" height="300" fetchpriority="low">
+                    <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
+                        <img src="https://i.imgur.com/5qtjtPC.png" alt="Healthcare sharing example" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;">
+                    </div>
                     <div class="share-card-content">
                         <h3>Pick a Meal Plan That Fits You</h3>
                         <ul class="share-checklist">
@@ -304,7 +345,9 @@
                 </div>
 
                 <div class="share-card">
-                    <img src="https://i.imgur.com/myhrFjr.png" alt="Teams example" loading="lazy" width="400" height="300" fetchpriority="low">
+                    <div class="share-image-container" style="aspect-ratio: 4/3; width: 100%; height: auto; background-color: #f4f4f4;">
+                        <img src="https://i.imgur.com/myhrFjr.png" alt="Teams example" loading="lazy" width="400" height="300" fetchpriority="low" style="width: 100%; height: auto; display: block;">
+                    </div>
                     <div class="share-card-content">
                         <h3>Checkout & Track Your Order</h3>
                         <ul class="share-checklist">
@@ -337,7 +380,7 @@
                         <div class="partner-card chef-card">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition, Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition, Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;">
                                 </div>
                                 <div class="partner-info">
                                     <h3>Chef Jonathan</h3>
@@ -350,7 +393,7 @@
                         <div class="partner-card chef-card">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;">
                                 </div>
                                 <div class="partner-info">
                                     <h3>Chef Alexander</h3>
@@ -429,7 +472,7 @@
                         <div class="partner-card chef-card">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition, Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low">
+                                <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition, Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;">
                                 </div>
                                 <div class="partner-info">
                                     <h3>Chef Jonathan</h3>
@@ -442,7 +485,7 @@
                         <div class="partner-card chef-card">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander" loading="lazy" width="80" height="80" fetchpriority="low">
+                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;">
                                 </div>
                                 <div class="partner-info">
                                     <h3>Chef Alexander</h3>
@@ -1016,20 +1059,31 @@
         
         // Defer non-critical functionality
         window.addEventListener('DOMContentLoaded', () => {
-            // Exit Intent handling
-            let hasShownPopup = false;
-            document.addEventListener('mouseleave', (e) => {
-                if (e.clientY < 0 && !hasShownPopup) {
-                    document.getElementById('exit-popup').classList.add('visible');
-                    document.getElementById('exit-popup-overlay').classList.add('visible');
-                    hasShownPopup = true;
-                }
-            });
+            // Check if device is mobile
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            
+            // Exit Intent handling - only add for desktop
+            if (!isMobile) {
+                let hasShownPopup = false;
+                document.addEventListener('mouseleave', (e) => {
+                    if (e.clientY < 0 && !hasShownPopup) {
+                        document.getElementById('exit-popup').classList.add('visible');
+                        document.getElementById('exit-popup-overlay').classList.add('visible');
+                        hasShownPopup = true;
+                    }
+                });
 
-            document.getElementById('exit-popup-overlay')?.addEventListener('click', () => {
-                document.getElementById('exit-popup').classList.remove('visible');
-                document.getElementById('exit-popup-overlay').classList.remove('visible');
-            });
+                document.getElementById('exit-popup-overlay')?.addEventListener('click', () => {
+                    document.getElementById('exit-popup').classList.remove('visible');
+                    document.getElementById('exit-popup-overlay').classList.remove('visible');
+                });
+            } else {
+                // Hide exit popup elements on mobile
+                const exitPopup = document.getElementById('exit-popup');
+                const exitOverlay = document.getElementById('exit-popup-overlay');
+                if (exitPopup) exitPopup.style.display = 'none';
+                if (exitOverlay) exitOverlay.style.display = 'none';
+            }
             
             // Update spots counter functionality
             const updateSpotsDisplay = (spots) => {
@@ -1060,6 +1114,9 @@
             const updateCountdown = () => {
                 const endDate = new Date('2025-04-12T06:59:59Z').getTime();
                 
+                // Use less frequent updates on mobile
+                const updateInterval = isMobile ? 10000 : 1000; // 10 seconds on mobile, 1 second on desktop
+                
                 const updateTimer = () => {
                     const currentTime = new Date().getTime();
                     const difference = endDate - currentTime;
@@ -1082,7 +1139,7 @@
                     // Use requestAnimationFrame instead of setInterval for better performance
                     if (difference > 0) {
                         // Only update once per second to save CPU on mobile
-                        setTimeout(() => requestAnimationFrame(updateTimer), 1000);
+                        setTimeout(() => requestAnimationFrame(updateTimer), updateInterval);
                     }
                 }
                 
@@ -1099,26 +1156,8 @@
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
             
-            // Initialize Intersection Observer for animations
-            const animationObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-visible');
-                        
-                        // Add card index for staggered animations
-                        const cards = entry.target.querySelectorAll('.benefit-card, .testimonial-card');
-                        cards.forEach((card, index) => {
-                            card.style.setProperty('--card-index', index);
-                        });
-                    }
-                });
-            }, { 
-                root: null, 
-                rootMargin: '0px', 
-                threshold: 0.1  // Lower threshold to improve performance
-            });
-
-            // Detect if device is low-end
+            // Detect if device is low-end or mobile
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
             const isLowEndDevice = () => {
                 // Check for low memory (less than 2GB)
                 if (navigator.deviceMemory && navigator.deviceMemory < 2) return true;
@@ -1129,44 +1168,59 @@
                 return false;
             };
             
-            // Only enable animations on capable devices
-            if (!isLowEndDevice() && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            // Initialize Intersection Observer for animations only on desktop or high-end devices
+            if (!isMobile && !isLowEndDevice() && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const animationObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-visible');
+                            
+                            // Add card index for staggered animations
+                            const cards = entry.target.querySelectorAll('.benefit-card, .testimonial-card');
+                            cards.forEach((card, index) => {
+                                card.style.setProperty('--card-index', index);
+                            });
+                        }
+                    });
+                }, { 
+                    root: null, 
+                    rootMargin: '0px', 
+                    threshold: 0.1  // Lower threshold to improve performance
+                });
+                
                 // Observe all animated sections
                 document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
                     animationObserver.observe(element);
                 });
+                
+                // Parallax scroll effect for hero section (optimized with requestAnimationFrame) - desktop only
+                let lastScrollY = window.scrollY;
+                const hero = document.querySelector('.hero');
+                let ticking = false;
+                
+                if (hero) {
+                    window.addEventListener('scroll', () => {
+                        if (!ticking) {
+                            requestAnimationFrame(() => {
+                                const scrollY = window.scrollY;
+                                if (scrollY > 0 && scrollY < window.innerHeight) {
+                                    const offset = scrollY * 0.5;
+                                    hero.style.setProperty('--scroll-offset', `${offset}px`);
+                                    hero.classList.add('scrolling');
+                                } else {
+                                    hero.classList.remove('scrolling');
+                                }
+                                lastScrollY = scrollY;
+                                ticking = false;
+                            });
+                            ticking = true;
+                        }
+                    }, { passive: true });
+                }
             } else {
-                // For low-end devices, just show everything without animations
+                // For mobile or low-end devices, just show everything without animations
                 document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
                     element.classList.add('animate-visible');
-                });
-            }
-
-            // Parallax scroll effect for hero section (optimized with requestAnimationFrame)
-            let lastScrollY = window.scrollY;
-            const hero = document.querySelector('.hero');
-            let ticking = false;
-            
-            // Only enable parallax on desktop devices
-            const isMobile = window.matchMedia('(max-width: 768px)').matches;
-            
-            if (!isMobile && hero) {
-                window.addEventListener('scroll', () => {
-                    if (!ticking) {
-                        requestAnimationFrame(() => {
-                            const scrollY = window.scrollY;
-                            if (scrollY > 0 && scrollY < window.innerHeight) {
-                                const offset = scrollY * 0.5;
-                                hero.style.setProperty('--scroll-offset', `${offset}px`);
-                                hero.classList.add('scrolling');
-                            } else {
-                                hero.classList.remove('scrolling');
-                            }
-                            lastScrollY = scrollY;
-                            ticking = false;
-                        });
-                        ticking = true;
-                    }
                 });
             }
 
@@ -1175,7 +1229,7 @@
             let lastScrollTop = 0;
             let ctaTicking = false;
             
-            if (mobileCTA) {
+            if (mobileCTA && isMobile) {
                 // Use passive event listener for better scroll performance
                 window.addEventListener('scroll', () => {
                     if (!ctaTicking) {
@@ -1255,7 +1309,7 @@
                     console.log('Native lazy loading supported');
                 }
             }
-        });
+        }, { once: true }); // Only run once
     </script>
     
     <!-- Typeform initialization script moved from head for performance -->
