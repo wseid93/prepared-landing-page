@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="smooth-scroll">
 <head>
+    <!-- Start of head - critical rendering path begins -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     
@@ -11,13 +12,13 @@
     <meta name="color-scheme" content="light">
     <meta name="mobile-web-app-capable" content="yes">
     
-    <!-- Preconnect to external domains -->
+    <!-- Enhanced Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://embed.typeform.com" crossorigin>
     <link rel="preconnect" href="https://i.imgur.com" crossorigin>
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     
     <link rel="icon" type="image/png" href="https://i.imgur.com/AcWQBZ7.png">
     <link rel="apple-touch-icon" href="https://i.imgur.com/AcWQBZ7.png">
@@ -309,36 +310,42 @@
     <link rel="preload" href="https://i.imgur.com/lhhxgxB.jpg" as="image" fetchpriority="high" imagesizes="100vw">
     
     <!-- Load non-critical CSS with lower priority -->
-    <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'; this.onload=null;">
     <noscript><link rel="stylesheet" href="styles.min.css"></noscript>
     
     <!-- Load fonts asynchronously with optimized loading -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;" crossorigin>
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" crossorigin></noscript>
     
     <!-- FontAwesome removed - using inline SVG icons instead -->
     
     <!-- Typeform Widget with defer to prevent blocking -->
     <script src="//embed.typeform.com/next/embed.js" defer></script>
 
-    <!-- Google Analytics 4 with Enhanced Measurement -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <!-- Google Analytics 4 with Enhanced Measurement - Optimized loading -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      
-      // Configure your GA4 property with enhanced measurement
-      gtag('config', 'G-XXXXXXXXXX', {
-        'send_page_view': true,
-        'cookie_domain': 'eatprepared.com',
-        'cookie_flags': 'SameSite=None;Secure',
-        'custom_map': {
-          'dimension1': 'client_id',
-          'dimension2': 'user_agent',
-          'dimension3': 'page_load_time'
-        }
+      window.addEventListener('DOMContentLoaded', function() {
+        var script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+        script.async = true;
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Configure your GA4 property with enhanced measurement
+        gtag('config', 'G-XXXXXXXXXX', {
+          'send_page_view': true,
+          'cookie_domain': 'eatprepared.com',
+          'cookie_flags': 'SameSite=None;Secure',
+          'custom_map': {
+            'dimension1': 'client_id',
+            'dimension2': 'user_agent',
+            'dimension3': 'page_load_time'
+          }
+        });
       });
       
       // Track Core Web Vitals
@@ -569,6 +576,7 @@
     </svg>
 </head>
 <body>
+    <!-- Start of body - above-the-fold content begins -->
     <!-- Add Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -1215,14 +1223,20 @@
         </div>
     </footer>
 
-    <!-- Consolidated and optimized JS -->
+    <!-- Critical JavaScript - Inline for fast loading -->
     <script>
-        // Initialize only critical functionality immediately
+        // Only initialize critical functionality immediately
         document.body.classList.add('js-loading');
         
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
+        // Identify if device is mobile
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    </script>
+    
+    <!-- Non-critical JavaScript - Deferred loading -->
+    <script defer>
         // Performance monitoring
         if (window.performance && window.performance.timing) {
             window.addEventListener('load', function() {
@@ -1250,9 +1264,13 @@
                 }, 0);
             });
         }
-        
-        // Defer non-critical functionality
-        window.addEventListener('DOMContentLoaded', () => {
+    </script>
+    
+    <!-- Animation and interaction functionality - loaded after DOM ready -->
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+            
             // Check if device is mobile
             const isMobile = window.matchMedia('(max-width: 768px)').matches;
             
@@ -1303,12 +1321,18 @@
                     updateSpotsDisplay(spotsLeft);
                 }
             });
-            
+        });
+    </script>
+    
+    <!-- Low-priority features - only loaded after page is fully rendered -->
+    <script defer>
+        window.addEventListener('load', () => {
             // Initialize countdown timer with requestAnimationFrame for better performance
             const updateCountdown = () => {
                 const endDate = new Date('2025-04-12T06:59:59Z').getTime();
                 
                 // Use less frequent updates on mobile
+                const isMobile = window.matchMedia('(max-width: 768px)').matches;
                 const updateInterval = isMobile ? 10000 : 1000; // 10 seconds on mobile, 1 second on desktop
                 
                 const updateTimer = () => {
@@ -1344,11 +1368,6 @@
             if (document.getElementById('countdown-days')) {
                 updateCountdown();
             }
-        });
-        
-        // Use window load event for non-critical visual enhancements
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
             
             // Detect if device is low-end or mobile
             const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -1386,132 +1405,134 @@
                 document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
                     animationObserver.observe(element);
                 });
-                
-                // Parallax scroll effect for hero section (optimized with requestAnimationFrame) - desktop only
-                let lastScrollY = window.scrollY;
-                const hero = document.querySelector('.hero');
-                let ticking = false;
-                
-                if (hero) {
-                    window.addEventListener('scroll', () => {
-                        if (!ticking) {
-                            requestAnimationFrame(() => {
-                                const scrollY = window.scrollY;
-                                if (scrollY > 0 && scrollY < window.innerHeight) {
-                                    const offset = scrollY * 0.5;
-                                    hero.style.setProperty('--scroll-offset', `${offset}px`);
-                                    hero.classList.add('scrolling');
-                                } else {
-                                    hero.classList.remove('scrolling');
-                                }
-                                lastScrollY = scrollY;
-                                ticking = false;
-                            });
-                            ticking = true;
-                        }
-                    }, { passive: true });
-                }
             } else {
                 // For mobile or low-end devices, just show everything without animations
                 document.querySelectorAll('.section-transition, .testimonials, .trusted-by').forEach((element) => {
                     element.classList.add('animate-visible');
                 });
             }
-
-            // Mobile CTA visibility optimized with passive event listener
-            const mobileCTA = document.querySelector('.mobile-cta');
-            let lastScrollTop = 0;
-            let ctaTicking = false;
-            
-            if (mobileCTA && isMobile) {
-                // Use passive event listener for better scroll performance
-                window.addEventListener('scroll', () => {
-                    if (!ctaTicking) {
-                        requestAnimationFrame(() => {
-                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                            const isScrollingDown = scrollTop > lastScrollTop;
-                            const isTopOfPage = scrollTop < 100;
-
-                            if (isScrollingDown && !isTopOfPage) {
-                                mobileCTA.classList.add('mobile-cta-visible');
-                            } else {
-                                mobileCTA.classList.remove('mobile-cta-visible');
-                            }
-
-                            lastScrollTop = scrollTop;
-                            ctaTicking = false;
-                        });
-                        ctaTicking = true;
-                    }
-                }, { passive: true }); // Add passive flag for better performance
-            }
-                            
-            // Smooth scroll for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        const headerOffset = 80;
-                        const elementPosition = target.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition - headerOffset;
-
-                        window.scrollBy({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
         });
+        
+        // Load advanced animations and effects after everything else
+        window.addEventListener('load', () => {
+            // Wait to ensure all critical content is loaded
+            setTimeout(() => {
+                // Mobile CTA visibility optimized with passive event listener
+                const mobileCTA = document.querySelector('.mobile-cta');
+                const isMobile = window.matchMedia('(max-width: 768px)').matches;
+                let lastScrollTop = 0;
+                let ctaTicking = false;
+                
+                if (mobileCTA && isMobile) {
+                    // Use passive event listener for better scroll performance
+                    window.addEventListener('scroll', () => {
+                        if (!ctaTicking) {
+                            requestAnimationFrame(() => {
+                                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                                const isScrollingDown = scrollTop > lastScrollTop;
+                                const isTopOfPage = scrollTop < 100;
 
-        // Lazy loading fallback for browsers that don't support it natively
-        window.addEventListener('load', function() {
-            // Check if browser supports IntersectionObserver
-            if ('IntersectionObserver' in window) {
-                // Check if native lazy loading is supported
-                if (!('loading' in HTMLImageElement.prototype)) {
-                    // Create an observer for images
-                    const imgObserver = new IntersectionObserver((entries, observer) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const img = entry.target;
-                                const dataSrc = img.getAttribute('data-src');
-                                if (dataSrc) {
-                                    img.src = dataSrc;
-                                    img.removeAttribute('data-src');
+                                if (isScrollingDown && !isTopOfPage) {
+                                    mobileCTA.classList.add('mobile-cta-visible');
+                                } else {
+                                    mobileCTA.classList.remove('mobile-cta-visible');
                                 }
-                                observer.unobserve(img);
-                            }
-                        });
-                    });
 
-                    // Apply to all images with loading="lazy"
-                    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-                        // Backup the original src
-                        if (!img.hasAttribute('data-src')) {
-                            img.setAttribute('data-src', img.src);
-                            // Use a small placeholder or data URI
-                            img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
-                            // Observe the image
-                            imgObserver.observe(img);
+                                lastScrollTop = scrollTop;
+                                ctaTicking = false;
+                            });
+                            ctaTicking = true;
+                        }
+                    }, { passive: true }); // Add passive flag for better performance
+                }
+
+                // Parallax scroll effect for hero section (optimized with requestAnimationFrame) - desktop only
+                if (!isMobile) {
+                    let lastScrollY = window.scrollY;
+                    const hero = document.querySelector('.hero');
+                    let ticking = false;
+                    
+                    if (hero) {
+                        window.addEventListener('scroll', () => {
+                            if (!ticking) {
+                                requestAnimationFrame(() => {
+                                    const scrollY = window.scrollY;
+                                    if (scrollY > 0 && scrollY < window.innerHeight) {
+                                        const offset = scrollY * 0.5;
+                                        hero.style.setProperty('--scroll-offset', `${offset}px`);
+                                        hero.classList.add('scrolling');
+                                    } else {
+                                        hero.classList.remove('scrolling');
+                                    }
+                                    lastScrollY = scrollY;
+                                    ticking = false;
+                                });
+                                ticking = true;
+                            }
+                        }, { passive: true });
+                    }
+                }
+                
+                // Smooth scroll for navigation links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            const headerOffset = 80;
+                            const elementPosition = target.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition - headerOffset;
+
+                            window.scrollBy({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
                         }
                     });
+                });
+            }, 100); // Small delay to ensure critical content is handled first
+        }, { once: true }); // Only run once
+    </script>
+    
+    <!-- Lazy loading polyfill -->
+    <script defer>
+        window.addEventListener('load', function() {
+            // Only run if needed
+            if ('IntersectionObserver' in window && !('loading' in HTMLImageElement.prototype)) {
+                // Create an observer for images
+                const imgObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const dataSrc = img.getAttribute('data-src');
+                            if (dataSrc) {
+                                img.src = dataSrc;
+                                img.removeAttribute('data-src');
+                            }
+                            observer.unobserve(img);
+                        }
+                    });
+                });
 
-                    console.log('Lazy loading polyfill applied');
-                } else {
-                    console.log('Native lazy loading supported');
-                }
+                // Apply to all images with loading="lazy"
+                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                    // Backup the original src
+                    if (!img.hasAttribute('data-src')) {
+                        img.setAttribute('data-src', img.src);
+                        // Use a small placeholder or data URI
+                        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+                        // Observe the image
+                        imgObserver.observe(img);
+                    }
+                });
             }
         }, { once: true }); // Only run once
     </script>
     
-    <!-- Typeform initialization script moved from head for performance -->
-    <script>
+    <!-- Typeform initialization -->
+    <script defer>
         // Initialize Typeform after page load
         window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-            
             // Make sure Typeform elements are initialized properly
             if (window.tf && typeof window.tf.createWidget === 'function') {
                 const widgets = document.querySelectorAll('[data-tf-live]');
@@ -1519,7 +1540,7 @@
                     console.log('Typeform widgets detected:', widgets.length);
                 }
             }
-        });
+        }, { once: true });
     </script>
 </body>
 </html>
