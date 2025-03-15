@@ -1,0 +1,6 @@
+# Fallbacks for browsers that don't support modern formats
+/avif/* /images/:splat 404
+/webp/* /images/:splat 404
+
+# Netlify redirects for proper path handling
+/* /index.html 200 

@@ -1,0 +1,69 @@
+# Netlify configuration for Prepared Landing Page
+# Optimized for modern image formats (WebP, AVIF)
+
+[build]
+  publish = "."
+  
+[dev]
+  framework = "#static"
+
+# Cache control for images - set long cache times for static assets
+[[headers]]
+  for = "/webp/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "image/webp"
+
+[[headers]]
+  for = "/avif/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "image/avif"
+
+[[headers]]
+  for = "/original/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.avif"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Correct MIME types for modern image formats
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Content-Type = "image/webp"
+
+[[headers]]
+  for = "/*.avif"
+  [headers.values]
+    Content-Type = "image/avif"
+
+# Add brotli compression for all assets
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Encoding = "br"
+
+# Enable HTTP/2 Server Push
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = "</webp/lhhxgxB.webp>; rel=preload; as=image" 

@@ -121,7 +121,17 @@
                 display: none;
             }
             .hero-image-container {
-                background-image: url('https://i.imgur.com/lhhxgxB.jpg');
+                background-image: url('https://i.imgur.com/lhhxgxB.avif');
+                background-image: -webkit-image-set(
+                    url('https://i.imgur.com/lhhxgxB.avif') type("image/avif"),
+                    url('https://i.imgur.com/lhhxgxB.webp') type("image/webp"),
+                    url('https://i.imgur.com/lhhxgxB.jpg') 1x
+                );
+                background-image: image-set(
+                    url('https://i.imgur.com/lhhxgxB.avif') type("image/avif"),
+                    url('https://i.imgur.com/lhhxgxB.webp') type("image/webp"),
+                    url('https://i.imgur.com/lhhxgxB.jpg') 1x
+                );
                 background-size: cover;
                 background-position: center;
                 position: absolute;
@@ -307,7 +317,9 @@
     </style>
 
     <!-- Preload key resources -->
-    <link rel="preload" href="https://i.imgur.com/lhhxgxB.jpg" as="image" fetchpriority="high" imagesizes="100vw">
+    <link rel="preload" href="https://i.imgur.com/lhhxgxB.avif" as="image" fetchpriority="high" imagesizes="100vw">
+    <link rel="preload" href="https://i.imgur.com/lhhxgxB.webp" as="image" fetchpriority="high" imagesizes="100vw" media="(max-width: 768px)">
+    <link rel="preload" href="https://i.imgur.com/lhhxgxB.jpg" as="image" fetchpriority="high" imagesizes="100vw" media="not all and (min-resolution: 1.1dppx)">
     
     <!-- Load non-critical CSS with lower priority -->
     <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'; this.onload=null;">
@@ -603,14 +615,14 @@
                 playsinline
                 loading="lazy"
                 fetchpriority="low"
-                poster="https://i.imgur.com/lhhxgxB.jpg"
+                poster="https://i.imgur.com/lhhxgxB.webp"
                 width="1920"
                 height="1080"
                 style="display: none;"
                 aria-label="Chef preparing personalized meals in a professional kitchen"
                 onloadedmetadata="this.style.display='block'">
                 <source src="https://i.imgur.com/lhhxgxB.mp4" type="video/mp4">
-                <p>Your browser doesn't support HTML5 video. Here's a <a href="https://i.imgur.com/lhhxgxB.jpg">link to the poster image</a> instead.</p>
+                <p>Your browser doesn't support HTML5 video. Here's a <a href="https://i.imgur.com/lhhxgxB.webp">link to the poster image</a> instead.</p>
             </video>
         </div>
         <div class="hero-content">
@@ -626,8 +638,8 @@
                     <span class="stat-label" itemprop="description">Meal Planning</span>
                 </div>
                 <div class="stat-item" itemscope itemtype="https://schema.org/Offer">
-                    <span class="stat-number" itemprop="name">1,000+</span>
-                    <span class="stat-label" itemprop="description">Meals</span>
+                    <span class="stat-number" itemprop="name">10,000+</span>
+                    <span class="stat-label" itemprop="description">Personalized Meals</span>
                 </div>
             </div>
             <div data-tf-live="01JKCR97WBT8JFCGH2EX1Z2M0J"></div>
@@ -724,7 +736,11 @@
                         <div class="partner-card chef-card" itemscope itemtype="https://schema.org/Person">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
+                                    <picture>
+                                        <source srcset="https://i.imgur.com/q46wE7H.avif" type="image/avif">
+                                        <source srcset="https://i.imgur.com/q46wE7H.webp" type="image/webp">
+                                        <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
+                                    </picture>
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">Chef Jonathan</h3>
@@ -737,7 +753,11 @@
                         <div class="partner-card chef-card" itemscope itemtype="https://schema.org/Person">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander - Certified nutritionist and chef from Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
+                                    <picture>
+                                        <source srcset="https://i.imgur.com/zwtXFoR.avif" type="image/avif">
+                                        <source srcset="https://i.imgur.com/zwtXFoR.webp" type="image/webp">
+                                        <img src="https://i.imgur.com/zwtXFoR.png" alt="Chef Alexander - Certified nutritionist and chef from Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
+                                    </picture>
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">Chef Alexander</h3>
@@ -750,7 +770,11 @@
                         <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/Uno4TR4.png" alt="Chef Moises - Sustainable local farm provider from Gardena" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    <picture>
+                                        <source srcset="https://i.imgur.com/Uno4TR4.avif" type="image/avif">
+                                        <source srcset="https://i.imgur.com/Uno4TR4.webp" type="image/webp">
+                                        <img src="https://i.imgur.com/Uno4TR4.png" alt="Chef Moises - Sustainable local farm provider from Gardena" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    </picture>
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">Chef Moises</h3>
@@ -763,7 +787,11 @@
                         <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/52OMvzu.png" alt="Lean Mean Meal Prep - Premium meal preparation service in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    <picture>
+                                        <source srcset="https://i.imgur.com/52OMvzu.avif" type="image/avif">
+                                        <source srcset="https://i.imgur.com/52OMvzu.webp" type="image/webp">
+                                        <img src="https://i.imgur.com/52OMvzu.png" alt="Lean Mean Meal Prep - Premium meal preparation service in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    </picture>
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">Lean Mean Meal Prep</h3>
@@ -776,7 +804,11 @@
                         <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/OwiW1oY.png" alt="Fresh Off The Boat - Seafood and nutrition partner in Costa Mesa" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    <picture>
+                                        <source srcset="https://i.imgur.com/OwiW1oY.avif" type="image/avif">
+                                        <source srcset="https://i.imgur.com/OwiW1oY.webp" type="image/webp">
+                                        <img src="https://i.imgur.com/OwiW1oY.png" alt="Fresh Off The Boat - Seafood and nutrition partner in Costa Mesa" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    </picture>
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">Fresh Off The Boat</h3>
@@ -789,7 +821,11 @@
                         <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/07wOkmX.png" alt="80/20 Fitness - Fitness and nutrition partner in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    <picture>
+                                        <source srcset="https://i.imgur.com/07wOkmX.avif" type="image/avif">
+                                        <source srcset="https://i.imgur.com/07wOkmX.webp" type="image/webp">
+                                        <img src="https://i.imgur.com/07wOkmX.png" alt="80/20 Fitness - Fitness and nutrition partner in Los Angeles" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    </picture>
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">80/20 Fitness</h3>
@@ -802,7 +838,11 @@
                         <div class="partner-card brand-card" itemscope itemtype="https://schema.org/Organization">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/dk8y4Hp.png" alt="OC FIT - Fitness and nutrition partner in Anaheim" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    <picture>
+                                        <source srcset="https://i.imgur.com/dk8y4Hp.avif" type="image/avif">
+                                        <source srcset="https://i.imgur.com/dk8y4Hp.webp" type="image/webp">
+                                        <img src="https://i.imgur.com/dk8y4Hp.png" alt="OC FIT - Fitness and nutrition partner in Anaheim" loading="lazy" width="80" height="80" fetchpriority="low" itemprop="image">
+                                    </picture>
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">OC FIT</h3>
@@ -816,7 +856,7 @@
                         <div class="partner-card chef-card" itemscope itemtype="https://schema.org/Person">
                             <div class="partner-header">
                                 <div class="partner-image">
-                                    <img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
+                                    <picture><source srcset="https://i.imgur.com/q46wE7H.avif" type="image/avif"><source srcset="https://i.imgur.com/q46wE7H.webp" type="image/webp"><img src="https://i.imgur.com/q46wE7H.png" alt="Chef Jonathan - Executive Chef specializing in performance nutrition from Newport Beach" loading="lazy" width="80" height="80" fetchpriority="low" style="aspect-ratio: 1/1; width: 80px; height: 80px;" itemprop="image">
                                 </div>
                                 <div class="partner-info">
                                     <h3 itemprop="name">Chef Jonathan</h3>
@@ -1072,7 +1112,7 @@
         <section class="signup section-transition light-to-dark">
             <div class="signup-container">
                 <h2>Join the Future of Personalized Nutrition</h2>
-                <p class="signup-description">Be the first to experience AI-powered meal delivery.<br>Get 20% off during our Early Access Program.</p>
+                <p class="signup-description">Be the first to experience AI-powered meal delivery. Get 20% off during our Early Access Program.</p>
                 <div data-tf-live="01JKCR97WBT8JFCGH2EX1Z2M0J"></div>
             </div>
         </section>

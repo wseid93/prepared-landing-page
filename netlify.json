@@ -1,0 +1,16 @@
+{
+  "name": "prepared-landing-page",
+  "description": "Prepared - AI-Personalized Meal Delivery for Peak Performance",
+  "image_optimization": {
+    "formats": ["webp", "avif"],
+    "quality": 80
+  },
+  "build_settings": {
+    "skip_processing": false,
+    "html_minify": true,
+    "css_minify": true,
+    "js_minify": true,
+    "image_compress": false
+  },
+  "plugins": []
+} 
