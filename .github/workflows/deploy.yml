@@ -35,4 +35,9 @@ jobs:
       #     ./deploy.sh --skip-deploy
           
       - name: Output deployment URL
-        run: echo "Site deployed to Netlify!" 
+        run: echo "Site deployed to Netlify!"
+
+      - name: Flush DNS cache
+        run: |
+          sudo dscacheutil -flushcache
+          sudo killall -HUP mDNSResponder 
