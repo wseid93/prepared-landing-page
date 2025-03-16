@@ -124,6 +124,7 @@ p {
     margin-bottom: -50px;
 }
 
+/* Removed arrow
 .hero::after {
     content: '';
     position: absolute;
@@ -151,6 +152,7 @@ p {
         transform: translateX(-50%) translateY(-5px);
     }
 }
+*/
 
 .hero-video {
     width: 100%;
@@ -252,11 +254,13 @@ p {
         margin-bottom: -70px;
     }
     
+    /* Removed arrow
     .hero::after {
         bottom: 40px;
         width: 36px;
         height: 36px;
     }
+    */
     
     .hero-content {
         padding: 0 1.5rem;
@@ -1329,6 +1333,15 @@ footer {
         max-width: 300px;
         margin: 0 auto;
     }
+}
+
+/* Force arrow removal - will override any cached rules */
+.hero::after {
+    display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
 /* Enhanced Animations */

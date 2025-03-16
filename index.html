@@ -1938,5 +1938,40 @@
             }
         });
     </script>
+
+    <!-- Force remove the arrow -->
+    <style>
+        /* Force arrow removal */
+        .hero::after {
+            display: none !important;
+            content: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            background-image: none !important;
+            animation: none !important;
+        }
+    </style>
+    <script>
+        // This script ensures the arrow is properly removed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create a new style element
+            const style = document.createElement('style');
+            // Add rules to remove the arrow
+            style.textContent = `
+                .hero::after {
+                    display: none !important;
+                    content: none !important;
+                    opacity: 0 !important;
+                    visibility: hidden !important;
+                    pointer-events: none !important;
+                    background-image: none !important;
+                    animation: none !important;
+                }
+            `;
+            // Add the style to the head
+            document.head.appendChild(style);
+        });
+    </script>
 </body>
 </html>

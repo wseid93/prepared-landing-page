@@ -1,3 +1,21 @@
 {
-	"siteId": "3387edf4-9fb6-475d-8c92-facad0f57db5"
+	"siteId": "3387edf4-9fb6-475d-8c92-facad0f57db5",
+	"geolocation": {
+		"data": {
+			"city": "Irvine",
+			"country": {
+				"code": "US",
+				"name": "United States"
+			},
+			"subdivision": {
+				"code": "CA",
+				"name": "California"
+			},
+			"timezone": "America/Los_Angeles",
+			"latitude": 33.6946,
+			"longitude": -117.8183,
+			"postalCode": "92606"
+		},
+		"timestamp": 1742146226233
+	}
 }
