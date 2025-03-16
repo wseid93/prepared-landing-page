@@ -3,6 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
@@ -28,15 +29,17 @@
     </video:video>
   </url>
   <url>
-    <loc>https://eatprepared.com/privacy</loc>
+    <loc>https://eatprepared.com/</loc>
     <lastmod>2024-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eatprepared.com/privacy"/>
   </url>
   <url>
-    <loc>https://eatprepared.com/terms</loc>
+    <loc>https://eatprepared.com/</loc>
     <lastmod>2024-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eatprepared.com/terms"/>
   </url>
 </urlset>
