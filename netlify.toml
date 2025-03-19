@@ -1,7 +1,0 @@
-# Simplified Netlify configuration for troubleshooting
-
-[build]
-  publish = "."
-  
-[dev]
-  framework = "#static" 
