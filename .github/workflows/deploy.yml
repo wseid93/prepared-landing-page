@@ -3,31 +3,43 @@ name: Deploy to Netlify
 on:
   push:
     branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
+      
+      # Optional: Setup Node.js if you need to process assets
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y webp libavif-bin
-          npm install -g netlify-cli
       
-      # Option 1: Use Netlify CLI directly with explicit site ID
-      - name: Deploy to Netlify
-        run: |
-          npx netlify deploy --site=${{ secrets.NETLIFY_SITE_ID }} --auth=${{ secrets.NETLIFY_AUTH_TOKEN }} --prod --dir="."
-        
+      # This just notifies Netlify that a new commit should be deployed
+      # The actual build/deploy happens in Netlify's service, not in this workflow
+      - name: Trigger Netlify Build
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          production-deploy: ${{ github.ref == 'refs/heads/main' }}
+          netlify-config-path: ./netlify.toml
+          production-branch: main
+          publish-dir: .
+          github-deployment-environment: production
+          github-deployment-description: "Deploy from GitHub Actions"
+          deploy-message: "Deploy from GitHub Actions"
+          enable-commit-comment: true
+          enable-pull-request-comment: true
+          enable-commit-status: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          
       # Uncomment this section if you still need to run your deploy script for image processing
       # - name: Process images (if needed)
       #   run: |
@@ -35,9 +47,4 @@ jobs:
       #     ./deploy.sh --skip-deploy
           
       - name: Output deployment URL
-        run: echo "Site deployed to Netlify!"
-
-      - name: Flush DNS cache
-        run: |
-          sudo dscacheutil -flushcache
-          sudo killall -HUP mDNSResponder 
+        run: echo "Site deployed to Netlify successfully!" 

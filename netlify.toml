@@ -1,0 +1,20 @@
+# Basic Netlify configuration for Git-based deployments
+
+[build]
+  publish = "."
+  command = ""  # No build command needed for static site
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.css]
+  minify = true
+
+[build.processing.js]
+  minify = true
+
+[build.processing.images]
+  compress = true 
