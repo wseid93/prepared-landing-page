@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support | Prepared Meal Delivery</title>
+    <meta name="description" content="Get help with your Prepared meal delivery service. Find answers to frequently asked questions or contact our support team.">
+    <meta property="og:title" content="Support | Prepared Meal Delivery">
+    <meta property="og:description" content="Find answers to your questions or contact our support team for assistance with Prepared meal delivery service.">
+    <meta property="og:image" content="URL-to-feature-image.jpg">
+    <meta property="og:url" content="https://eatprepared.com/support.html">
+    <meta property="og:type" content="website">
+    <style>
+        /* Notion-inspired clean styling */
+        :root {
+            --text-primary: rgb(55, 53, 47);
+            --text-secondary: rgba(55, 53, 47, 0.65);
+            --background: white;
+            --hover-bg: rgba(55, 53, 47, 0.08);
+            --border: rgb(233, 233, 231);
+            --highlight-bg: #f7f6f3;
+            --conclusion-bg: #f9f8f6;
+            --accent: #2e8b57;
+            --accent-hover: #1e6b3d;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--background);
+        }
+        
+        /* Custom hyperlink styling */
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        
+        a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+        
+        .site-nav a {
+            font-weight: 600;
+            border-bottom: none;
+        }
+        
+        .site-nav a:hover {
+            border-bottom: none;
+            text-decoration: none;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+            padding-bottom: 3px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .intro {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+        
+        .divider {
+            margin: 2rem 0;
+            height: 1px;
+            background-color: var(--border);
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .section {
+            margin: 2.5rem 0;
+            padding-bottom: 1rem;
+        }
+        
+        .section h2 {
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+        
+        /* Navigation bar styling */
+        .site-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .site-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+        
+        .site-nav a:hover {
+            color: var(--accent);
+        }
+        
+        .site-nav .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        
+        .last-updated {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .contact-section {
+            background-color: var(--highlight-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        /* FAQ styling */
+        .faq {
+            margin-bottom: 2rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .faq-answer {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-method strong {
+            width: 150px;
+            flex-shrink: 0;
+        }
+        
+        .report-issue {
+            background-color: var(--highlight-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+    </style>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2H6S8FJNXS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2H6S8FJNXS', {
+        'page_title': 'Support',
+        'page_path': '/support.html'
+      });
+    </script>
+</head>
+<body>
+    <!-- Simple navigation bar -->
+    <nav class="site-nav">
+        <a href="/" class="logo">PREPARED</a>
+        <a href="/">Home</a>
+    </nav>
+
+    <h1>Support</h1>
+    
+    <p class="last-updated">Last updated: March 24, 2025</p>
+    
+    <p class="intro">We're Here to Help! If you have any questions, issues, or feedback regarding the Prepared app, please reach out through one of the following methods:</p>
+    
+    <div class="section">
+        <h2>Contact Us</h2>
+        
+        <div class="contact-method">
+            <strong>Email Support:</strong>
+            <span><a href="mailto:support@eatprepared.com">support@eatprepared.com</a></span>
+        </div>
+        
+        <div class="contact-method">
+            <strong>Phone Support:</strong>
+            <span>(714) 296-9327 (Available weekdays, 9 AM – 5 PM PST)</span>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Frequently Asked Questions (FAQs)</h2>
+        
+        <div class="faq">
+            <div class="faq-item">
+                <div class="faq-question">How do I customize my meals?</div>
+                <div class="faq-answer">You can customize your meals directly within the Prepared app by setting your dietary preferences and goals.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I update my payment information?</div>
+                <div class="faq-answer">Navigate to your account settings in the app and select "Payment Information" to update your details.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I reset my password?</div>
+                <div class="faq-answer">Use the "Forgot Password" option on the login page within the app to reset your password via email.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I cancel or modify my order?</div>
+                <div class="faq-answer">To cancel or modify an order, contact our support team as soon as possible via email or phone.</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="report-issue">
+        <h2>Report an Issue</h2>
+        
+        <p>If you encounter any technical issues or bugs, please let us know by emailing us at <a href="mailto:support@eatprepared.com">support@eatprepared.com</a>. Include details such as your device model, operating system version, and a description of the issue.</p>
+    </div>
+    
+    <div class="contact-section">
+        <p>Thank you for choosing Prepared—we appreciate your feedback and are dedicated to providing you with exceptional support!</p>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <p class="footer">© 2025 Prepared Meal Delivery | <a href="/">Back to Home</a> | <a href="/privacy-policy.html">Privacy Policy</a></p>
+</body>
+</html> 
