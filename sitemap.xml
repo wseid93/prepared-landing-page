@@ -54,12 +54,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Removed non-existent listicle entry
   <url>
     <loc>https://eatprepared.com/listicles/5-top-chef-meal-delivery-services.html</loc>
     <lastmod>2024-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  -->
   <url>
     <loc>https://eatprepared.com/listicles/chef-maria-rodriguez.html</loc>
     <lastmod>2024-06-20</lastmod>
