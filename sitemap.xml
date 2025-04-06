@@ -80,12 +80,14 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <!-- Commenting out /terms as it's served by index.html which has / as canonical
   <url>
     <loc>https://eatprepared.com/terms</loc>
     <lastmod>2024-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  -->
   <url>
     <loc>https://eatprepared.com/support.html</loc>
     <lastmod>2024-06-01</lastmod>
